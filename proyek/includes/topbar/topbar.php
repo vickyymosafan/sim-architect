@@ -89,15 +89,6 @@
                                     <div class="small text-gray-500">Tidak ada notifikasi baru</div>
                                 </div>
                                 <?php endif; ?>
-
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item text-center py-3 bg-light" href="verifikasi.php">
-                                    <i class="fas fa-eye mr-2"></i>
-                                    <span class="font-weight-bold">
-                                        <span class="d-none d-sm-inline">Lihat Semua Verifikasi</span>
-                                        <span class="d-inline d-sm-none">Lihat Semua</span>
-                                    </span>
-                                </a>
                             </div>
                         </li>
 
