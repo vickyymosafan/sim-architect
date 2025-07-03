@@ -33,9 +33,6 @@
     <!-- Custom CSS for enhanced styling -->
     <link href="includes/custom-styles.css" rel="stylesheet">
 
-    <!-- Sidebar text visibility fix -->
-    <link href="includes/sidebar-fix.css" rel="stylesheet">
-
     <!-- Additional Custom CSS -->
     <style>
         .sidebar-brand-text {
@@ -140,6 +137,33 @@
         .sidebar * {
             opacity: 1 !important;
             visibility: visible !important;
+        }
+
+        /* Collapse items styling */
+        .collapse-inner .collapse-item.active {
+            color: #fff !important;
+            background-color: #4e73df !important;
+        }
+
+        .collapse-inner .collapse-item.active:hover {
+            color: #fff !important;
+            background-color: #375a7f !important;
+        }
+
+        /* Badge counter visibility */
+        .sidebar .badge-counter {
+            color: #fff !important;
+            background-color: #e74a3b !important;
+        }
+
+        /* Collapsible navigation states */
+        .sidebar .nav-link[data-toggle="collapse"]:not(.collapsed) {
+            color: #fff !important;
+        }
+
+        .sidebar .nav-link[data-toggle="collapse"]:not(.collapsed) span,
+        .sidebar .nav-link[data-toggle="collapse"]:not(.collapsed) i {
+            color: #fff !important;
         }
     </style>
 
