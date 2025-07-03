@@ -79,19 +79,19 @@ if ($_SESSION['level'] != "proyek") {
              <li class="nav-item">
                 <a class="nav-link" href="uploud_file.php">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Uploud file desain</span></a>     
+                    <span>Upload file desain</span></a>
             </li>
             
              <li class="nav-item">
                 <a class="nav-link" href="verifikasi.php">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>verifikasi</span></a>    
+                    <span>Verifikasi</span></a>
             </li>
 
             <li class="nav-item">
                 <a class="nav-link" href="input_tugas.php">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>input tugas harian</span></a>    
+                    <span>Input tugas harian</span></a>
             </li>
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
@@ -124,7 +124,7 @@ if ($_SESSION['level'] != "proyek") {
                         <i class="fa fa-bars"></i>
                     </button>
 
-                    <h1>./h1>
+                    <h1>Dashboard Proyek</h1>
 
                 </nav>
                 <!-- End of Topbar -->
@@ -182,11 +182,7 @@ if ($_SESSION['level'] != "proyek") {
         </div>
     </div>
 
-   
 
-
-</div> <!-- End of Content Wrapper -->
-</div> <!-- End of Page Wrapper -->
 
 <!-- Bootstrap core JavaScript -->
 <script src="../tmp/vendor/jquery/jquery.min.js"></script>
