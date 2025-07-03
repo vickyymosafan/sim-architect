@@ -1,3 +1,14 @@
+<?php
+/**
+ * Header Component - SB Admin 2 Template
+ *
+ * Note: Session management is handled by the parent file that includes this component.
+ * This component assumes session is already started and validated.
+ *
+ * Required variables:
+ * - $page_title (optional): Page title to display
+ */
+?>
 <!DOCTYPE html>
 <html lang="en">
 

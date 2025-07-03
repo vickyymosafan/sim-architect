@@ -30,7 +30,7 @@
 
             <!-- Nav Item - Kelola User Proyek -->
             <li class="nav-item">
-                <a class="nav-link" href="admin.php?url=kelola_user_proyek">
+                <a class="nav-link" href="kelola_user_proyek.php">
                     <i class="fas fa-fw fa-users"></i>
                     <span>Kelola User Proyek</span></a>
             </li>

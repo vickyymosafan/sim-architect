@@ -1,3 +1,15 @@
+<?php
+/**
+ * Topbar Component - SB Admin 2 Template
+ *
+ * Note: Session management is handled by the parent file that includes this component.
+ * This component assumes session is already started and validated.
+ *
+ * Required variables:
+ * - $page_title (optional): Page title to display
+ * - $_SESSION['nama']: User name from session (should be validated by parent)
+ */
+?>
                 <!-- Topbar -->
                 <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
 
@@ -23,7 +35,10 @@
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">
-                                    <?php echo isset($_SESSION['nama']) ? $_SESSION['nama'] : 'User'; ?>
+                                    <?php
+                                    // Safety check for session data
+                                    echo isset($_SESSION['nama']) && !empty($_SESSION['nama']) ? $_SESSION['nama'] : 'User';
+                                    ?>
                                 </span>
                                 <img class="img-profile rounded-circle"
                                     src="../tmp/img/undraw_profile.svg">
