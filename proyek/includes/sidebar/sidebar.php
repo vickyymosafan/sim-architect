@@ -2,71 +2,114 @@
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="proyek.php">
                 <div class="sidebar-brand-icon rotate-n-15">
-                    <i class="fas fa-keyboard"></i>
+                    <i class="fas fa-drafting-compass"></i>
                 </div>
-                <div class="sidebar-brand-text mx-3">antosa</div>
+                <div class="sidebar-brand-text mx-3">Antosa Arsitek</div>
             </a>
 
             <!-- Divider -->
             <hr class="sidebar-divider my-0">
 
             <!-- Nav Item - Dashboard -->
-            <li class="nav-item">
+            <li class="nav-item <?php echo (basename($_SERVER['PHP_SELF']) == 'proyek.php') ? 'active' : ''; ?>">
                 <a class="nav-link" href="proyek.php">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Dashboard</span></a>         
+                    <span>Dashboard</span>
+                </a>
             </li>
-          
-            
+
             <!-- Divider -->
             <hr class="sidebar-divider">
 
             <!-- Heading -->
             <div class="sidebar-heading">
-                Interface
+                Manajemen Proyek
             </div>
-            
-             <li class="nav-item">
-                <a class="nav-link" href="tugas_harian.php">
-                    <i class="fas fa-fw fa-tasks"></i>
-                    <span>Tugas harian</span></a>
+
+            <!-- Nav Item - Manajemen Tugas (Collapsible) -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTugas"
+                    aria-expanded="true" aria-controls="collapseTugas">
+                    <i class="fas fa-fw fa-folder-open"></i>
+                    <span>Manajemen Tugas</span>
+                </a>
+                <div id="collapseTugas" class="collapse <?php echo (in_array(basename($_SERVER['PHP_SELF']), ['input_tugas.php', 'tugas_harian.php'])) ? 'show' : ''; ?>"
+                     aria-labelledby="headingTugas" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Kelola Tugas:</h6>
+                        <a class="collapse-item <?php echo (basename($_SERVER['PHP_SELF']) == 'input_tugas.php') ? 'active' : ''; ?>"
+                           href="input_tugas.php">
+                            <i class="fas fa-plus-circle"></i> Input Tugas Harian
+                        </a>
+                        <a class="collapse-item <?php echo (basename($_SERVER['PHP_SELF']) == 'tugas_harian.php') ? 'active' : ''; ?>"
+                           href="tugas_harian.php">
+                            <i class="fas fa-tasks"></i> Daftar Tugas Harian
+                        </a>
+                    </div>
+                </div>
             </li>
 
-            
-             <li class="nav-item">
-                <a class="nav-link" href="upload_file.php">
-                    <i class="fas fa-fw fa-upload"></i>
-                    <span>Upload file desain</span></a>
+            <!-- Nav Item - Manajemen File (Collapsible) -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFile"
+                    aria-expanded="true" aria-controls="collapseFile">
+                    <i class="fas fa-fw fa-folder"></i>
+                    <span>Manajemen File</span>
+                </a>
+                <div id="collapseFile" class="collapse <?php echo (in_array(basename($_SERVER['PHP_SELF']), ['upload_file.php', 'file_approved.php'])) ? 'show' : ''; ?>"
+                     aria-labelledby="headingFile" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Kelola File:</h6>
+                        <a class="collapse-item <?php echo (basename($_SERVER['PHP_SELF']) == 'upload_file.php') ? 'active' : ''; ?>"
+                           href="upload_file.php">
+                            <i class="fas fa-upload"></i> Upload File Desain
+                        </a>
+                        <a class="collapse-item <?php echo (basename($_SERVER['PHP_SELF']) == 'file_approved.php') ? 'active' : ''; ?>"
+                           href="file_approved.php">
+                            <i class="fas fa-check-circle"></i> File Disetujui
+                        </a>
+                    </div>
+                </div>
             </li>
+            <!-- Divider -->
+            <hr class="sidebar-divider">
 
-             <li class="nav-item">
-                <a class="nav-link" href="file_approved.php">
-                    <i class="fas fa-fw fa-check-circle"></i>
-                    <span>File Disetujui</span></a>
-            </li>
-
-             <li class="nav-item">
+            <!-- Nav Item - Verifikasi & Approval -->
+            <li class="nav-item <?php echo (basename($_SERVER['PHP_SELF']) == 'verifikasi.php') ? 'active' : ''; ?>">
                 <a class="nav-link" href="verifikasi.php">
                     <i class="fas fa-fw fa-clipboard-check"></i>
-                    <span>Verifikasi</span></a>
+                    <span>Verifikasi & Approval</span>
+                    <?php
+                    // Hitung jumlah item pending untuk badge
+                    require_once '../koneksi.php';
+                    $count_tugas = mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM tugas_proyek WHERE status_verifikasi = 'pending'"));
+                    $count_file = mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM file_gambar WHERE status_verifikasi = 'pending'"));
+                    $total_pending = $count_tugas + $count_file;
+                    if ($total_pending > 0) {
+                        echo '<span class="badge badge-danger badge-counter">' . $total_pending . '</span>';
+                    }
+                    ?>
+                </a>
             </li>
 
-            <li class="nav-item">
-                <a class="nav-link" href="input_tugas.php">
-                    <i class="fas fa-fw fa-plus-circle"></i>
-                    <span>Input tugas harian</span></a>
-            </li>
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
 
-             <li class="nav-item">
-                <a class="nav-link" href="../logout.php">
+            <!-- Heading -->
+            <div class="sidebar-heading">
+                Sistem
+            </div>
+
+            <!-- Nav Item - Logout -->
+            <li class="nav-item">
+                <a class="nav-link" href="#" data-toggle="modal" data-target="#logoutModal">
                     <i class="fas fa-sign-out-alt"></i>
-                    <span>Keluar</span></a>
+                    <span>Keluar</span>
+                </a>
             </li>
-            
+
             <!-- Sidebar Toggler (Sidebar) -->
             <div class="text-center d-none d-md-inline">
                 <button class="rounded-circle border-0" id="sidebarToggle"></button>

@@ -1,0 +1,386 @@
+/* Custom Styles for Antosa Arsitek Project Management System */
+
+/* Sidebar Enhancements */
+.sidebar-brand-text {
+    font-size: 0.9rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+.sidebar-brand-icon {
+    font-size: 1.5rem;
+}
+
+/* Collapsible Menu Items */
+.collapse-item {
+    padding: 0.5rem 1rem;
+    margin: 0.1rem 0;
+    border-radius: 0.35rem;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: #5a5c69;
+}
+
+.collapse-item i {
+    margin-right: 0.5rem;
+    width: 16px;
+    text-align: center;
+}
+
+.collapse-item:hover {
+    background-color: #f8f9fc;
+    transform: translateX(5px);
+    text-decoration: none;
+    color: #3a3b45;
+    box-shadow: 0 0.15rem 1.75rem 0 rgba(58, 59, 69, 0.15);
+}
+
+.collapse-item.active {
+    background-color: #4e73df !important;
+    color: white !important;
+    font-weight: 600;
+}
+
+.collapse-item.active i {
+    color: white !important;
+}
+
+.collapse-item.active:hover {
+    background-color: #375a7f !important;
+    color: white !important;
+    text-decoration: none;
+}
+
+.collapse-item.active:hover i {
+    color: white !important;
+}
+
+/* Badge Counter */
+.badge-counter {
+    font-size: 0.7rem;
+    position: absolute;
+    top: -2px;
+    right: -6px;
+    min-width: 1.2rem;
+    height: 1.2rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Breadcrumb Styling */
+.breadcrumb {
+    font-size: 0.85rem;
+    background-color: transparent;
+    padding: 0;
+    margin: 0;
+}
+
+.breadcrumb-item + .breadcrumb-item::before {
+    content: "›";
+    font-weight: bold;
+    color: #6c757d;
+}
+
+.breadcrumb-item a {
+    color: #6c757d;
+    text-decoration: none;
+}
+
+.breadcrumb-item a:hover {
+    color: #4e73df;
+    text-decoration: none;
+}
+
+.breadcrumb-item.active {
+    color: #495057;
+    font-weight: 600;
+}
+
+/* Notification Icons */
+.icon-circle {
+    height: 2.5rem;
+    width: 2.5rem;
+    border-radius: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Dropdown Enhancements */
+.dropdown-list {
+    max-width: 20rem;
+    border: none;
+    box-shadow: 0 0.15rem 1.75rem 0 rgba(58, 59, 69, 0.15);
+}
+
+.dropdown-header {
+    background-color: #f8f9fc;
+    border-bottom: 1px solid #e3e6f0;
+    font-weight: 600;
+    color: #5a5c69;
+}
+
+/* Active Navigation Items */
+.nav-item.active .nav-link {
+    background-color: rgba(255, 255, 255, 0.1) !important;
+    border-radius: 0.35rem;
+    font-weight: 600;
+    color: #fff !important;
+}
+
+.nav-item.active .nav-link span {
+    color: #fff !important;
+}
+
+.nav-item.active .nav-link i {
+    color: #fff !important;
+}
+
+/* Sidebar Navigation Links */
+.sidebar .nav-link {
+    color: rgba(255, 255, 255, 0.8) !important;
+}
+
+.sidebar .nav-link:hover {
+    color: #fff !important;
+}
+
+.sidebar .nav-link span {
+    color: rgba(255, 255, 255, 0.8) !important;
+}
+
+.sidebar .nav-link:hover span {
+    color: #fff !important;
+}
+
+.sidebar .nav-link i {
+    color: rgba(255, 255, 255, 0.8) !important;
+}
+
+.sidebar .nav-link:hover i {
+    color: #fff !important;
+}
+
+/* Folder Icons Animation */
+.nav-link[data-toggle="collapse"] i {
+    transition: transform 0.3s ease;
+}
+
+.nav-link[data-toggle="collapse"]:not(.collapsed) i {
+    transform: rotate(90deg);
+}
+
+/* Fix for collapsed navigation text visibility */
+.sidebar .nav-link.collapsed {
+    color: rgba(255, 255, 255, 0.8) !important;
+}
+
+.sidebar .nav-link.collapsed span {
+    color: rgba(255, 255, 255, 0.8) !important;
+}
+
+.sidebar .nav-link.collapsed i {
+    color: rgba(255, 255, 255, 0.8) !important;
+}
+
+.sidebar .nav-link.collapsed:hover {
+    color: #fff !important;
+    background-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+.sidebar .nav-link.collapsed:hover span {
+    color: #fff !important;
+}
+
+.sidebar .nav-link.collapsed:hover i {
+    color: #fff !important;
+}
+
+/* Fix for expanded navigation */
+.sidebar .nav-link:not(.collapsed) {
+    color: #fff !important;
+    background-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+.sidebar .nav-link:not(.collapsed) span {
+    color: #fff !important;
+}
+
+.sidebar .nav-link:not(.collapsed) i {
+    color: #fff !important;
+}
+
+/* Card Enhancements */
+.card {
+    border: none;
+    box-shadow: 0 0.15rem 1.75rem 0 rgba(58, 59, 69, 0.15);
+    transition: all 0.3s ease;
+}
+
+.card:hover {
+    box-shadow: 0 0.25rem 2rem 0 rgba(58, 59, 69, 0.2);
+    transform: translateY(-2px);
+}
+
+/* Table Enhancements */
+.table {
+    border-radius: 0.35rem;
+    overflow: hidden;
+}
+
+.table thead th {
+    border-top: none;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    letter-spacing: 0.5px;
+}
+
+/* Button Enhancements */
+.btn {
+    border-radius: 0.35rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 0.25rem 1rem 0 rgba(58, 59, 69, 0.2);
+}
+
+/* Alert Enhancements */
+.alert {
+    border: none;
+    border-radius: 0.5rem;
+    font-weight: 500;
+}
+
+.alert-info {
+    background-color: #d1ecf1;
+    color: #0c5460;
+}
+
+/* Footer Enhancements */
+.sticky-footer {
+    border-top: 1px solid #e3e6f0;
+}
+
+.copyright {
+    font-size: 0.9rem;
+}
+
+/* Modal Enhancements */
+.modal-content {
+    border: none;
+    border-radius: 0.5rem;
+    box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.175);
+}
+
+.modal-header {
+    border-bottom: 1px solid #e3e6f0;
+    background-color: #f8f9fc;
+}
+
+.modal-footer {
+    border-top: 1px solid #e3e6f0;
+    background-color: #f8f9fc;
+}
+
+/* Responsive Enhancements */
+@media (max-width: 768px) {
+    .breadcrumb {
+        font-size: 0.75rem;
+    }
+    
+    .collapse-item {
+        padding: 0.4rem 0.8rem;
+    }
+    
+    .sidebar-brand-text {
+        font-size: 0.8rem;
+    }
+}
+
+/* Loading Animation */
+.loading {
+    opacity: 0.6;
+    pointer-events: none;
+}
+
+/* Smooth Transitions */
+* {
+    transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, 
+                border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+/* Focus States */
+.nav-link:focus,
+.collapse-item:focus,
+.btn:focus {
+    outline: 2px solid #4e73df;
+    outline-offset: 2px;
+}
+
+/* Override Bootstrap and SB Admin styles for sidebar text visibility */
+.sidebar-dark .nav-item .nav-link {
+    color: rgba(255, 255, 255, 0.8) !important;
+}
+
+.sidebar-dark .nav-item .nav-link:hover {
+    color: #fff !important;
+}
+
+.sidebar-dark .nav-item.active .nav-link {
+    color: #fff !important;
+}
+
+.sidebar-dark .nav-item .nav-link[data-toggle="collapse"] {
+    color: rgba(255, 255, 255, 0.8) !important;
+}
+
+.sidebar-dark .nav-item .nav-link[data-toggle="collapse"]:hover {
+    color: #fff !important;
+}
+
+.sidebar-dark .nav-item .nav-link[data-toggle="collapse"]:not(.collapsed) {
+    color: #fff !important;
+}
+
+/* Ensure all text elements in sidebar are visible */
+.sidebar-dark .nav-item .nav-link span,
+.sidebar-dark .nav-item .nav-link i {
+    color: inherit !important;
+}
+
+/* Fix for SB Admin 2 default styles */
+.sidebar .nav-item .nav-link {
+    color: rgba(255, 255, 255, 0.8) !important;
+}
+
+.sidebar .nav-item .nav-link:focus,
+.sidebar .nav-item .nav-link:hover {
+    color: #fff !important;
+}
+
+.sidebar .nav-item.active .nav-link {
+    color: #fff !important;
+}
+
+/* Print Styles */
+@media print {
+    .sidebar,
+    .topbar,
+    .footer,
+    .btn,
+    .modal {
+        display: none !important;
+    }
+
+    .content-wrapper {
+        margin-left: 0 !important;
+    }
+}
