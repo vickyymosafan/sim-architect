@@ -1,6 +1,5 @@
 <?php
-session_start();
-unset($_SESSION['nama']);
-session_destroy();
+require_once 'includes/session_manager.php';
+destroy_session();
 header('location:index.php');
 ?>

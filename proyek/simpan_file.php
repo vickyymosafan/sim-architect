@@ -23,7 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $query = mysqli_query($koneksi, $sql);
 
             if ($query) {
-                echo "<script>alert('File berhasil diupload!'); window.location.href='uploud_file.php';</script>";
+                echo "<script>alert('File berhasil diupload!'); window.location.href='upload_file.php';</script>";
             } else {
                 echo "<div class='alert alert-danger'>Upload berhasil, tapi gagal simpan ke database: " . mysqli_error($koneksi) . "</div>";
             }

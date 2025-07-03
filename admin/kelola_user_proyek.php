@@ -1,16 +1,9 @@
 <?php
-session_start();
+// Session is already started in header component
 require '../koneksi.php';
 
-if (!isset($_SESSION['nama'])) {
-    header("Location: ../index.php");
-    exit;
-}
-
-if ($_SESSION['level'] != "admin") {
-    echo "<script>alert('Anda tidak memiliki akses ke halaman ini!'); window.location='../index.php';</script>";
-    exit;
-}
+// Session validation is already handled in admin.php
+// No need to check again since this file is included through admin routing
 
 // Handle form submission
 if ($_POST) {

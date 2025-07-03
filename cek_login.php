@@ -1,6 +1,7 @@
 <?php
 require 'koneksi.php';
-session_start();
+require_once 'includes/session_manager.php';
+safe_session_start();
 
 // Ambil input dari form
 $user = trim($_POST['username']);

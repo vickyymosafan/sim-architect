@@ -1,15 +1,6 @@
 <?php
-session_start();
-
-if (!isset($_SESSION['nama'])) {
-    header("Location: ../index.php");
-    exit;
-}
-
-if ($_SESSION['level'] != "admin") {
-    echo "<script>alert('Anda tidak memiliki akses ke halaman ini!'); window.location='../index.php';</script>";
-    exit;
-}
+require_once '../includes/session_manager.php';
+check_session_auth('admin');
 
 $page_title = "Dashboard Admin";
 include 'includes/header/header.php';
