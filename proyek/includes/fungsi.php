@@ -40,9 +40,9 @@ function getPendingCounts() {
  * @param string $class CSS class tambahan
  * @return string HTML badge atau empty string jika count = 0
  */
-function generateBadgeCounter($count, $class = 'badge-danger badge-counter') {
+function generateBadgeCounter($count, $class = 'badge-danger') {
     if ($count > 0) {
-        return '<span class="badge ' . $class . '">' . $count . '</span>';
+        return '<span class="badge ' . $class . ' position-absolute" style="top: 8px; right: 8px; font-size: 0.7rem; min-width: 1.2rem; height: 1.2rem; border-radius: 50%; display: flex; align-items: center; justify-content: center;">' . $count . '</span>';
     }
     return '';
 }

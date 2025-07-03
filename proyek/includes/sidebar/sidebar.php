@@ -39,13 +39,13 @@
                      aria-labelledby="headingTugas" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Kelola Tugas:</h6>
-                        <a class="collapse-item <?php echo (basename($_SERVER['PHP_SELF']) == 'input_tugas.php') ? 'active' : ''; ?>"
+                        <a class="dropdown-item <?php echo (basename($_SERVER['PHP_SELF']) == 'input_tugas.php') ? 'active bg-primary text-white' : ''; ?>"
                            href="input_tugas.php">
-                            <i class="fas fa-plus-circle"></i> Input Tugas Harian
+                            <i class="fas fa-plus-circle mr-2"></i> Input Tugas Harian
                         </a>
-                        <a class="collapse-item <?php echo (basename($_SERVER['PHP_SELF']) == 'tugas_harian.php') ? 'active' : ''; ?>"
+                        <a class="dropdown-item <?php echo (basename($_SERVER['PHP_SELF']) == 'tugas_harian.php') ? 'active bg-primary text-white' : ''; ?>"
                            href="tugas_harian.php">
-                            <i class="fas fa-tasks"></i> Daftar Tugas Harian
+                            <i class="fas fa-tasks mr-2"></i> Daftar Tugas Harian
                         </a>
                     </div>
                 </div>
@@ -62,13 +62,13 @@
                      aria-labelledby="headingFile" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Kelola File:</h6>
-                        <a class="collapse-item <?php echo (basename($_SERVER['PHP_SELF']) == 'upload_file.php') ? 'active' : ''; ?>"
+                        <a class="dropdown-item <?php echo (basename($_SERVER['PHP_SELF']) == 'upload_file.php') ? 'active bg-primary text-white' : ''; ?>"
                            href="upload_file.php">
-                            <i class="fas fa-upload"></i> Upload File Desain
+                            <i class="fas fa-upload mr-2"></i> Upload File Desain
                         </a>
-                        <a class="collapse-item <?php echo (basename($_SERVER['PHP_SELF']) == 'file_approved.php') ? 'active' : ''; ?>"
+                        <a class="dropdown-item <?php echo (basename($_SERVER['PHP_SELF']) == 'file_approved.php') ? 'active bg-primary text-white' : ''; ?>"
                            href="file_approved.php">
-                            <i class="fas fa-check-circle"></i> File Disetujui
+                            <i class="fas fa-check-circle mr-2"></i> File Disetujui
                         </a>
                     </div>
                 </div>

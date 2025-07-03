@@ -59,13 +59,13 @@
                                 require_once '../koneksi.php';
                                 $pending_counts = getPendingCounts();
                                 if ($pending_counts['total'] > 0) {
-                                    echo '<span class="badge badge-danger badge-counter">' . $pending_counts['total'] . '</span>';
+                                    echo '<span class="badge badge-danger position-absolute" style="top: 8px; right: 8px; font-size: 0.7rem; min-width: 1.2rem; height: 1.2rem; border-radius: 50%; display: flex; align-items: center; justify-content: center;">' . $pending_counts['total'] . '</span>';
                                 }
                                 ?>
                             </a>
                             <!-- Dropdown - Alerts -->
-                            <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
-                                aria-labelledby="alertsDropdown" style="min-width: 20rem;">
+                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                                aria-labelledby="alertsDropdown" style="min-width: 20rem; max-width: 20rem; border: none; box-shadow: 0 0.15rem 1.75rem 0 rgba(58, 59, 69, 0.15);">
                                 <h6 class="dropdown-header bg-primary text-white">
                                     <i class="fas fa-bell mr-2"></i>Notifikasi Verifikasi
                                 </h6>

@@ -30,8 +30,7 @@
     <!-- Custom styles for this template-->
     <link href="../tmp/css/sb-admin-2.min.css" rel="stylesheet">
 
-    <!-- Custom CSS for enhanced styling -->
-    <link href="includes/custom-styles.css" rel="stylesheet">
+    <!-- Custom CSS removed - using SB Admin 2 default styles -->
 
     <!-- Include functions for reusable components -->
     <?php require_once 'includes/fungsi.php'; ?>
