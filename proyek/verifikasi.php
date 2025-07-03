@@ -1,4 +1,7 @@
 <?php
+require_once '../includes/session_manager.php';
+check_session_auth('proyek');
+
 $page_title = "Verifikasi";
 include 'includes/header/header.php';
 ?>
