@@ -30,8 +30,6 @@
     <!-- Custom styles for this template-->
     <link href="../tmp/css/sb-admin-2.min.css" rel="stylesheet">
 
-    <!-- Custom CSS removed - using SB Admin 2 default styles -->
-
     <!-- Include functions for reusable components -->
     <?php require_once 'includes/fungsi.php'; ?>
 
@@ -69,6 +67,118 @@
         .sidebar * {
             opacity: 1 !important;
             visibility: visible !important;
+        }
+
+        /* Enhanced Topbar Responsive Styles */
+        .topbar {
+            min-height: 4.375rem;
+        }
+
+        .topbar .navbar-nav .nav-item .nav-link {
+            padding: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 3rem;
+            height: 3rem;
+            transition: all 0.2s ease;
+            border-radius: 0.35rem;
+        }
+
+        .topbar .navbar-nav .nav-item .nav-link:hover {
+            background-color: rgba(0,0,0,0.05);
+        }
+
+        /* Perfect alignment for topbar items */
+        .topbar .navbar-nav {
+            align-items: center;
+            height: 100%;
+        }
+
+        .topbar .navbar-nav .nav-item {
+            display: flex;
+            align-items: center;
+            height: 100%;
+        }
+
+        /* Notification icon specific styling */
+        .topbar .nav-item .nav-link i.fa-bell {
+            font-size: 1.1rem;
+            color: #5a5c69;
+        }
+
+        /* User dropdown specific styling */
+        .topbar .nav-item .nav-link .img-profile {
+            border: 2px solid #e3e6f0;
+            transition: border-color 0.2s ease;
+        }
+
+        .topbar .nav-item .nav-link:hover .img-profile {
+            border-color: #d1d3e2;
+        }
+
+        /* Responsive adjustments for small screens */
+        @media (max-width: 575.98px) {
+            .topbar {
+                padding-left: 0.5rem;
+                padding-right: 0.5rem;
+            }
+
+            .topbar .navbar-nav .nav-item .nav-link {
+                padding: 0.25rem;
+                width: 2.5rem;
+                height: 2.5rem;
+            }
+
+            .topbar .nav-item .nav-link i.fa-bell {
+                font-size: 1rem;
+            }
+
+            .topbar .nav-item .nav-link .img-profile {
+                width: 1.75rem;
+                height: 1.75rem;
+            }
+
+            .topbar .dropdown-menu {
+                max-width: calc(100vw - 2rem) !important;
+                left: 1rem !important;
+                right: 1rem !important;
+                transform: none !important;
+            }
+        }
+
+        /* Medium screens adjustments */
+        @media (min-width: 576px) and (max-width: 767.98px) {
+            .topbar .dropdown-menu {
+                max-width: 22rem;
+            }
+        }
+
+        /* Ensure proper text truncation */
+        .text-truncate {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        /* Responsive utilities for better mobile experience */
+        .min-width-0 {
+            min-width: 0;
+        }
+
+        .flex-shrink-1 {
+            flex-shrink: 1;
+        }
+
+        /* Badge positioning fix for mobile */
+        @media (max-width: 575.98px) {
+            .position-absolute.badge {
+                top: 4px !important;
+                right: 4px !important;
+                font-size: 0.6rem !important;
+                min-width: 1rem !important;
+                height: 1rem !important;
+            }
         }
     </style>
 
