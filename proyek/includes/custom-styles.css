@@ -305,11 +305,7 @@
     }
 }
 
-/* Loading Animation */
-.loading {
-    opacity: 0.6;
-    pointer-events: none;
-}
+
 
 /* Smooth Transitions */
 * {
@@ -325,50 +321,7 @@
     outline-offset: 2px;
 }
 
-/* Override Bootstrap and SB Admin styles for sidebar text visibility */
-.sidebar-dark .nav-item .nav-link {
-    color: rgba(255, 255, 255, 0.8) !important;
-}
-
-.sidebar-dark .nav-item .nav-link:hover {
-    color: #fff !important;
-}
-
-.sidebar-dark .nav-item.active .nav-link {
-    color: #fff !important;
-}
-
-.sidebar-dark .nav-item .nav-link[data-toggle="collapse"] {
-    color: rgba(255, 255, 255, 0.8) !important;
-}
-
-.sidebar-dark .nav-item .nav-link[data-toggle="collapse"]:hover {
-    color: #fff !important;
-}
-
-.sidebar-dark .nav-item .nav-link[data-toggle="collapse"]:not(.collapsed) {
-    color: #fff !important;
-}
-
-/* Ensure all text elements in sidebar are visible */
-.sidebar-dark .nav-item .nav-link span,
-.sidebar-dark .nav-item .nav-link i {
-    color: inherit !important;
-}
-
-/* Fix for SB Admin 2 default styles */
-.sidebar .nav-item .nav-link {
-    color: rgba(255, 255, 255, 0.8) !important;
-}
-
-.sidebar .nav-item .nav-link:focus,
-.sidebar .nav-item .nav-link:hover {
-    color: #fff !important;
-}
-
-.sidebar .nav-item.active .nav-link {
-    color: #fff !important;
-}
+/* Note: Sidebar text visibility is handled by sidebar-fix.css for better specificity */
 
 /* Print Styles */
 @media print {
