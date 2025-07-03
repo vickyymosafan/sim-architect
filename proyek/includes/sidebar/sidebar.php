@@ -36,7 +36,7 @@
 
             
              <li class="nav-item">
-                <a class="nav-link" href="uploud_file.php">
+                <a class="nav-link" href="upload_file.php">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Upload file desain</span></a>     
             </li>

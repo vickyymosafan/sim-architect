@@ -1,9 +1,9 @@
 <?php
 $page_title = "Input Tugas Harian";
-include 'header.php';
+include 'includes/header/header.php';
 ?>
 
-<?php include 'sidebar.php'; ?>
+<?php include 'includes/sidebar/sidebar.php'; ?>
 
         <!-- Content Wrapper -->
         <div id="content-wrapper" class="d-flex flex-column">
@@ -11,7 +11,7 @@ include 'header.php';
             <!-- Main Content -->
             <div id="content">
 
-<?php include 'topbar.php'; ?>
+<?php include 'includes/topbar/topbar.php'; ?>
 
                 <div class="container-fluid mt-4">
 
@@ -58,4 +58,4 @@ include 'header.php';
             </div>
             <!-- End of Main Content -->
 
-<?php include 'footer.php'; ?>
+<?php include 'includes/footer/footer.php'; ?>
