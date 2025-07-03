@@ -71,6 +71,15 @@
     justify-content: center;
 }
 
+/* Topbar Badge Counter - specific positioning for topbar */
+.topbar .badge-counter {
+    top: -8px;
+    right: -8px;
+    border: 2px solid #fff;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    z-index: 10;
+}
+
 /* Breadcrumb Styling */
 .breadcrumb {
     font-size: 0.85rem;
@@ -113,8 +122,53 @@
 /* Dropdown Enhancements */
 .dropdown-list {
     max-width: 20rem;
+    min-width: 18rem;
     border: none;
     box-shadow: 0 0.15rem 1.75rem 0 rgba(58, 59, 69, 0.15);
+}
+
+/* Topbar Notification Improvements */
+.topbar .nav-item.dropdown .nav-link {
+    position: relative;
+    padding: 0.5rem 1rem;
+}
+
+.topbar .nav-item.dropdown .nav-link i {
+    font-size: 1.1rem;
+}
+
+/* Notification Dropdown Styling */
+.dropdown-item.d-flex {
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid #e3e6f0;
+}
+
+.dropdown-item.d-flex:last-child {
+    border-bottom: none;
+}
+
+.dropdown-item.d-flex:hover {
+    background-color: #f8f9fc;
+    transform: translateX(2px);
+    transition: all 0.2s ease;
+}
+
+/* Notification Bell Hover Effect */
+.topbar .nav-link:hover i {
+    color: #5a5c69 !important;
+    transform: scale(1.1);
+    transition: all 0.2s ease;
+}
+
+/* Notification Dropdown Header */
+.dropdown-header.bg-primary {
+    margin: 0;
+    border-radius: 0.35rem 0.35rem 0 0;
+}
+
+/* Icon Circle Flex Shrink */
+.icon-circle {
+    flex-shrink: 0;
 }
 
 .dropdown-header {
@@ -140,28 +194,32 @@
     color: #fff !important;
 }
 
-/* Sidebar Navigation Links */
-.sidebar .nav-link {
-    color: rgba(255, 255, 255, 0.8) !important;
-}
-
-.sidebar .nav-link:hover {
-    color: #fff !important;
-}
-
-.sidebar .nav-link span {
-    color: rgba(255, 255, 255, 0.8) !important;
-}
-
-.sidebar .nav-link:hover span {
-    color: #fff !important;
-}
-
+/* Sidebar Navigation Links - Consolidated */
+.sidebar .nav-link,
+.sidebar .nav-link span,
 .sidebar .nav-link i {
     color: rgba(255, 255, 255, 0.8) !important;
 }
 
+.sidebar .nav-link:hover,
+.sidebar .nav-link:hover span,
 .sidebar .nav-link:hover i {
+    color: #fff !important;
+}
+
+/* Collapsed Navigation States */
+.sidebar .nav-link.collapsed:hover {
+    background-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+/* Expanded Navigation States */
+.sidebar .nav-link:not(.collapsed) {
+    color: #fff !important;
+    background-color: rgba(255, 255, 255, 0.1) !important;
+}
+
+.sidebar .nav-link:not(.collapsed) span,
+.sidebar .nav-link:not(.collapsed) i {
     color: #fff !important;
 }
 
@@ -172,46 +230,6 @@
 
 .nav-link[data-toggle="collapse"]:not(.collapsed) i {
     transform: rotate(90deg);
-}
-
-/* Fix for collapsed navigation text visibility */
-.sidebar .nav-link.collapsed {
-    color: rgba(255, 255, 255, 0.8) !important;
-}
-
-.sidebar .nav-link.collapsed span {
-    color: rgba(255, 255, 255, 0.8) !important;
-}
-
-.sidebar .nav-link.collapsed i {
-    color: rgba(255, 255, 255, 0.8) !important;
-}
-
-.sidebar .nav-link.collapsed:hover {
-    color: #fff !important;
-    background-color: rgba(255, 255, 255, 0.1) !important;
-}
-
-.sidebar .nav-link.collapsed:hover span {
-    color: #fff !important;
-}
-
-.sidebar .nav-link.collapsed:hover i {
-    color: #fff !important;
-}
-
-/* Fix for expanded navigation */
-.sidebar .nav-link:not(.collapsed) {
-    color: #fff !important;
-    background-color: rgba(255, 255, 255, 0.1) !important;
-}
-
-.sidebar .nav-link:not(.collapsed) span {
-    color: #fff !important;
-}
-
-.sidebar .nav-link:not(.collapsed) i {
-    color: #fff !important;
 }
 
 /* Card Enhancements */
@@ -295,13 +313,24 @@
     .breadcrumb {
         font-size: 0.75rem;
     }
-    
+
     .collapse-item {
         padding: 0.4rem 0.8rem;
     }
-    
+
     .sidebar-brand-text {
         font-size: 0.8rem;
+    }
+
+    /* Responsive Notification Layout */
+    .dropdown-list {
+        min-width: 16rem;
+        max-width: 90vw;
+    }
+
+    .topbar .nav-link {
+        width: 2.5rem;
+        height: 2.5rem;
     }
 }
 

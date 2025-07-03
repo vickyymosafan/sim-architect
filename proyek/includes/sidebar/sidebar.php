@@ -82,14 +82,10 @@
                     <i class="fas fa-fw fa-clipboard-check"></i>
                     <span>Verifikasi & Approval</span>
                     <?php
-                    // Hitung jumlah item pending untuk badge
+                    // Gunakan fungsi untuk menghitung item pending
                     require_once '../koneksi.php';
-                    $count_tugas = mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM tugas_proyek WHERE status_verifikasi = 'pending'"));
-                    $count_file = mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM file_gambar WHERE status_verifikasi = 'pending'"));
-                    $total_pending = $count_tugas + $count_file;
-                    if ($total_pending > 0) {
-                        echo '<span class="badge badge-danger badge-counter">' . $total_pending . '</span>';
-                    }
+                    $pending_counts = getPendingCounts();
+                    echo generateBadgeCounter($pending_counts['total']);
                     ?>
                 </a>
             </li>

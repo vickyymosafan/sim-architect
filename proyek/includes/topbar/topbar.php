@@ -58,11 +58,9 @@
                                 <!-- Counter - Alerts -->
                                 <?php
                                 require_once '../koneksi.php';
-                                $count_tugas = mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM tugas_proyek WHERE status_verifikasi = 'pending'"));
-                                $count_file = mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM file_gambar WHERE status_verifikasi = 'pending'"));
-                                $total_pending = $count_tugas + $count_file;
-                                if ($total_pending > 0) {
-                                    echo '<span class="badge badge-danger badge-counter" style="position: absolute; top: 0.2rem; right: 0.2rem;">' . $total_pending . '</span>';
+                                $pending_counts = getPendingCounts();
+                                if ($pending_counts['total'] > 0) {
+                                    echo '<span class="badge badge-danger badge-counter" style="position: absolute; top: 0.2rem; right: 0.2rem;">' . $pending_counts['total'] . '</span>';
                                 }
                                 ?>
                             </a>
@@ -72,49 +70,13 @@
                                 <h6 class="dropdown-header bg-primary text-white">
                                     <i class="fas fa-bell mr-2"></i>Notifikasi Verifikasi
                                 </h6>
-                                <?php if ($count_tugas > 0): ?>
-                                <a class="dropdown-item d-flex align-items-center py-3 border-bottom" href="verifikasi.php">
-                                    <div class="mr-3">
-                                        <div class="icon-circle bg-warning">
-                                            <i class="fas fa-tasks text-white"></i>
-                                        </div>
-                                    </div>
-                                    <div class="flex-grow-1">
-                                        <div class="small text-gray-500 mb-1">
-                                            <i class="fas fa-clock mr-1"></i><?php echo date('d M Y, H:i'); ?>
-                                        </div>
-                                        <span class="font-weight-bold text-dark">
-                                            <?php echo $count_tugas; ?> tugas menunggu verifikasi
-                                        </span>
-                                    </div>
-                                    <div class="ml-2">
-                                        <i class="fas fa-chevron-right text-gray-400"></i>
-                                    </div>
-                                </a>
-                                <?php endif; ?>
+                                <?php
+                                // Generate notification items using functions
+                                echo generateNotificationItem($pending_counts['tugas'], 'tugas', 'fas fa-tasks', 'bg-warning');
+                                echo generateNotificationItem($pending_counts['file'], 'file', 'fas fa-file', 'bg-info');
+                                ?>
 
-                                <?php if ($count_file > 0): ?>
-                                <a class="dropdown-item d-flex align-items-center py-3 border-bottom" href="verifikasi.php">
-                                    <div class="mr-3">
-                                        <div class="icon-circle bg-info">
-                                            <i class="fas fa-file text-white"></i>
-                                        </div>
-                                    </div>
-                                    <div class="flex-grow-1">
-                                        <div class="small text-gray-500 mb-1">
-                                            <i class="fas fa-clock mr-1"></i><?php echo date('d M Y, H:i'); ?>
-                                        </div>
-                                        <span class="font-weight-bold text-dark">
-                                            <?php echo $count_file; ?> file menunggu verifikasi
-                                        </span>
-                                    </div>
-                                    <div class="ml-2">
-                                        <i class="fas fa-chevron-right text-gray-400"></i>
-                                    </div>
-                                </a>
-                                <?php endif; ?>
-
-                                <?php if ($total_pending == 0): ?>
+                                <?php if ($pending_counts['total'] == 0): ?>
                                 <div class="dropdown-item text-center py-4">
                                     <i class="fas fa-check-circle fa-2x text-success mb-2"></i>
                                     <div class="small text-gray-500">Tidak ada notifikasi baru</div>
