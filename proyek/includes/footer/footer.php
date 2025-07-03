@@ -1,18 +1,22 @@
             <!-- Footer -->
             <footer class="sticky-footer bg-white">
-                <div class="container my-auto">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="copyright text-left my-auto">
+                <div class="container-fluid py-2 px-3">
+                    <div class="row align-items-center">
+                        <div class="col-12 col-sm-6 col-md-6">
+                            <div class="copyright text-center text-sm-left">
                                 <span>&copy; <?php echo date('Y'); ?> <strong>Antosa Arsitek</strong>. Sistem Manajemen Proyek</span>
                             </div>
                         </div>
-                        <div class="col-md-6">
-                            <div class="text-right my-auto">
+                        <div class="col-12 col-sm-6 col-md-6">
+                            <div class="text-center text-sm-right">
                                 <small class="text-muted">
-                                    Versi 2.0 |
-                                    <i class="fas fa-user"></i> <?php echo isset($_SESSION['nama']) ? $_SESSION['nama'] : 'User'; ?> |
-                                    <i class="fas fa-clock"></i> <?php echo date('d M Y, H:i'); ?>
+                                    <span class="d-block d-sm-inline">
+                                        <i class="fas fa-user"></i> <?php echo isset($_SESSION['nama']) ? $_SESSION['nama'] : 'User'; ?>
+                                    </span>
+                                    <span class="d-none d-lg-inline"> | </span>
+                                    <span class="d-block d-lg-inline">
+                                        <i class="fas fa-clock"></i> <?php echo date('d M Y, H:i'); ?>
+                                    </span>
                                 </small>
                             </div>
                         </div>
@@ -74,9 +78,124 @@
     <!-- Custom scripts for all pages -->
     <script src="../tmp/js/sb-admin-2.min.js"></script>
 
-    <!-- Enhanced Responsive Topbar Script -->
+    <!-- Enhanced Footer Responsive Styles -->
+    <style>
+        /* Enhanced responsive footer styles */
+        .sticky-footer {
+            border-top: 1px solid #e3e6f0;
+            min-height: auto !important;
+            height: auto !important;
+            padding: 0 !important;
+        }
+
+        .sticky-footer .container-fluid {
+            padding-top: 0.75rem !important;
+            padding-bottom: 0.75rem !important;
+        }
+
+        @media (max-width: 575.98px) {
+            .sticky-footer .container-fluid {
+                padding-top: 0.5rem !important;
+                padding-bottom: 0.5rem !important;
+            }
+
+            .sticky-footer .copyright {
+                margin-bottom: 0.25rem;
+                font-size: 0.8rem;
+            }
+
+            .sticky-footer .text-muted {
+                font-size: 0.7rem !important;
+                line-height: 1.2;
+            }
+
+            .sticky-footer .row {
+                margin: 0;
+            }
+
+            .sticky-footer .col-12 {
+                padding: 0.1rem 0;
+            }
+        }
+
+        @media (min-width: 576px) and (max-width: 767.98px) {
+            .sticky-footer .text-muted {
+                font-size: 0.75rem;
+            }
+
+            .sticky-footer .copyright {
+                font-size: 0.85rem;
+            }
+        }
+
+        @media (min-width: 768px) {
+            .sticky-footer .text-muted {
+                font-size: 0.8rem;
+            }
+
+            .sticky-footer .copyright {
+                font-size: 0.9rem;
+            }
+        }
+
+        /* Ensure footer content doesn't overflow */
+        .sticky-footer .text-muted span {
+            white-space: nowrap;
+        }
+
+        @media (max-width: 575.98px) {
+            .sticky-footer .text-muted span {
+                white-space: normal;
+                word-break: break-word;
+            }
+
+            .sticky-footer .copyright span {
+                display: block !important;
+                text-align: center;
+            }
+
+            .sticky-footer .text-center.text-sm-right {
+                text-align: center !important;
+            }
+        }
+    </style>
+
+    <!-- Enhanced Responsive Topbar and Footer Script -->
     <script>
         $(document).ready(function() {
+            // Enhanced responsive footer handling
+            function adjustFooterResponsiveness() {
+                var $footer = $('.sticky-footer');
+                var windowWidth = $(window).width();
+
+                // Ensure footer stays compact
+                $footer.css({
+                    'min-height': 'auto',
+                    'height': 'auto'
+                });
+
+                // Adjust footer padding and spacing based on screen size
+                if (windowWidth <= 575) {
+                    // Extra small devices - more compact
+                    $footer.find('.container-fluid').css({
+                        'padding-top': '0.5rem',
+                        'padding-bottom': '0.5rem'
+                    });
+                } else if (windowWidth <= 767) {
+                    // Small devices
+                    $footer.find('.container-fluid').css({
+                        'padding-top': '0.6rem',
+                        'padding-bottom': '0.6rem'
+                    });
+                } else {
+                    // Medium and larger devices
+                    $footer.find('.container-fluid').css({
+                        'padding-top': '0.75rem',
+                        'padding-bottom': '0.75rem'
+                    });
+                }
+            }
+
             // Enhanced responsive dropdown positioning
             function adjustDropdownPosition() {
                 $('.dropdown-menu').each(function() {
@@ -161,6 +280,17 @@
 
             handleBreadcrumbOverflow();
             $(window).on('resize', handleBreadcrumbOverflow);
+
+            // Initialize footer responsiveness
+            adjustFooterResponsiveness();
+
+            // Handle window resize for footer
+            $(window).on('resize', function() {
+                adjustFooterResponsiveness();
+                if ($('.dropdown-menu.show').length > 0) {
+                    adjustDropdownPosition();
+                }
+            });
         });
     </script>
 
