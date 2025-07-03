@@ -37,12 +37,6 @@ CREATE TABLE `file_gambar` (
 -- Dumping data untuk tabel `file_gambar`
 --
 
-INSERT INTO `file_gambar` (`id`, `deskripsi`, `gambar`) VALUES
-(1, 'tes', '1750656699_TUGAS_8_-_KELOMPOK_4.pdf'),
-(2, 'tes2', '1750656816_24516-86669-1-PB.pdf'),
-(3, 'tes.dwg', '1750656917_sample1.dwg'),
-(4, 'tes4', '1750657264_image_1.jpg');
-
 -- --------------------------------------------------------
 
 --
@@ -61,9 +55,6 @@ CREATE TABLE `login_logs` (
 --
 -- Dumping data untuk tabel `login_logs`
 --
-
-INSERT INTO `login_logs` (`id`, `user_id`, `email`, `ip_address`, `status`, `created_at`) VALUES
-(1, 1, 'mlayusek@gmail.com', '::1', 'success', '2025-06-07 12:58:43');
 
 -- --------------------------------------------------------
 
@@ -117,14 +108,6 @@ CREATE TABLE `tugas_proyek` (
 --
 -- Dumping data untuk tabel `tugas_proyek`
 --
-
-INSERT INTO `tugas_proyek` (`id`, `nama_kegiatan`, `deskripsi`, `tgl`, `status`) VALUES
-(1, 'tes', 'tes', '2025-06-23', 'proses'),
-(2, 'gdg', 'gdfgfg', '2025-06-23', 'batal'),
-(3, 'tess', 'ee', '2025-06-24', 'selesai'),
-(4, 'tes', 'asas', '2025-06-15', 'proses'),
-(5, '1', 'fe', '2025-06-16', 'selesai'),
-(6, 'gdg', 'ae', '2025-06-25', 'batal');
 
 -- --------------------------------------------------------
 
@@ -199,13 +182,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT untuk tabel `file_gambar`
 --
 ALTER TABLE `file_gambar`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 
 --
 -- AUTO_INCREMENT untuk tabel `login_logs`
 --
 ALTER TABLE `login_logs`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 
 --
 -- AUTO_INCREMENT untuk tabel `password_resets`
@@ -223,7 +206,7 @@ ALTER TABLE `petugas`
 -- AUTO_INCREMENT untuk tabel `tugas_proyek`
 --
 ALTER TABLE `tugas_proyek`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 
 --
 -- AUTO_INCREMENT untuk tabel `users`
