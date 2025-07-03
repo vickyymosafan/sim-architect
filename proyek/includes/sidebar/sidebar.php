@@ -31,7 +31,8 @@
             <!-- Nav Item - Manajemen Tugas (Collapsible) -->
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTugas"
-                    aria-expanded="true" aria-controls="collapseTugas">
+                    aria-expanded="<?php echo (in_array(basename($_SERVER['PHP_SELF']), ['input_tugas.php', 'tugas_harian.php'])) ? 'true' : 'false'; ?>"
+                    aria-controls="collapseTugas">
                     <i class="fas fa-fw fa-folder-open"></i>
                     <span>Manajemen Tugas</span>
                 </a>
@@ -54,7 +55,8 @@
             <!-- Nav Item - Manajemen File (Collapsible) -->
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFile"
-                    aria-expanded="true" aria-controls="collapseFile">
+                    aria-expanded="<?php echo (in_array(basename($_SERVER['PHP_SELF']), ['upload_file.php', 'file_approved.php'])) ? 'true' : 'false'; ?>"
+                    aria-controls="collapseFile">
                     <i class="fas fa-fw fa-folder"></i>
                     <span>Manajemen File</span>
                 </a>

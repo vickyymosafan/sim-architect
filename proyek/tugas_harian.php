@@ -15,24 +15,51 @@ include 'includes/header/header.php';
             <div id="content">
 
 <?php include 'includes/topbar/topbar.php'; ?>
-                <div class="container mt-5">
-                    <h2 class="mb-4">Daftar Tugas Harian yang Disetujui</h2>
-                    <div class="alert alert-info">
-                        <i class="fas fa-info-circle"></i>
-                        Halaman ini menampilkan tugas yang sudah melalui proses verifikasi dan disetujui.
-                    </div>
-                    <table class="table table-bordered">
-                        <thead class="thead-dark">
-                            <tr>
-                                <th>No</th>
-                                <th>Nama Tugas</th>
-                                <th>Deskripsi</th>
-                                <th>Tanggal</th>
-                                <th>Status</th>
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
 
-                            </tr>
-                        </thead>
-                        <tbody>
+                    <!-- Page Heading -->
+                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                        <h1 class="h3 mb-0 text-gray-800">Daftar Tugas Harian</h1>
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb mb-0 bg-transparent p-0">
+                                <li class="breadcrumb-item"><a href="proyek.php">Dashboard</a></li>
+                                <li class="breadcrumb-item"><a href="#">Manajemen Tugas</a></li>
+                                <li class="breadcrumb-item active">Daftar Tugas</li>
+                            </ol>
+                        </nav>
+                    </div>
+
+                    <!-- Info Alert -->
+                    <div class="alert alert-info alert-dismissible fade show" role="alert">
+                        <i class="fas fa-info-circle mr-2"></i>
+                        <strong>Informasi:</strong> Halaman ini menampilkan tugas yang sudah melalui proses verifikasi dan disetujui.
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+
+                    <!-- Tugas Harian Card -->
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">
+                                <i class="fas fa-tasks mr-2"></i>Tugas yang Disetujui
+                            </h6>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                    <thead class="thead-dark">
+                                        <tr>
+                                            <th class="text-center" style="width: 5%;">No</th>
+                                            <th style="width: 25%;">Nama Tugas</th>
+                                            <th style="width: 35%;">Deskripsi</th>
+                                            <th class="text-center" style="width: 15%;">Tanggal</th>
+                                            <th class="text-center" style="width: 15%;">Status</th>
+                                            <th class="text-center" style="width: 5%;">Aksi</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
 
                             <?php
                             require '../koneksi.php';
@@ -40,30 +67,51 @@ include 'includes/header/header.php';
                             $sql = mysqli_query($koneksi, "SELECT * FROM tugas_proyek WHERE status_verifikasi = 'approved' ORDER BY tgl DESC");
 
                             if (mysqli_num_rows($sql) > 0) {
+                                $no = 1;
                                 while ($data = mysqli_fetch_array($sql)) {
                                 ?>
                                 <tr>
-                                    <td><?php echo $data['id']; ?></td>
-                                    <td><?php echo $data['nama_kegiatan']; ?></td>
-                                    <td><?php echo $data['deskripsi']; ?></td>
-                                    <td><?php echo $data['tgl']; ?></td>
+                                    <td class="text-center"><?php echo $no++; ?></td>
+                                    <td class="font-weight-bold"><?php echo htmlspecialchars($data['nama_kegiatan']); ?></td>
                                     <td>
+                                        <div class="text-truncate" style="max-width: 300px;" title="<?php echo htmlspecialchars($data['deskripsi']); ?>">
+                                            <?php echo htmlspecialchars($data['deskripsi']); ?>
+                                        </div>
+                                    </td>
+                                    <td class="text-center">
+                                        <small class="text-muted">
+                                            <?php echo date('d M Y', strtotime($data['tgl'])); ?>
+                                        </small>
+                                    </td>
+                                    <td class="text-center">
                                         <?php
                                         $status = $data['status'];
                                         $badgeClass = 'secondary';
-                                        if ($status == 'proses')
-                                            $badgeClass = 'warning';
-                                        else if ($status == 'selesai')
-                                            $badgeClass = 'success';
-                                        else if ($status == 'batal')
-                                            $badgeClass = 'danger';
-                                        ?>
+                                        $statusText = 'Belum Diatur';
 
-                                        <!-- Status Button with Modal Trigger -->
-                                        <button type="button" class="btn btn-sm btn-<?php echo $badgeClass; ?>"
-                                            data-toggle="modal" data-target="#updateStatusModal<?php echo $data['id']; ?>">
-                                            <?php echo ucfirst($status); ?>
+                                        if ($status == 'proses') {
+                                            $badgeClass = 'warning';
+                                            $statusText = 'Dalam Proses';
+                                        } else if ($status == 'selesai') {
+                                            $badgeClass = 'success';
+                                            $statusText = 'Selesai';
+                                        } else if ($status == 'batal') {
+                                            $badgeClass = 'danger';
+                                            $statusText = 'Dibatalkan';
+                                        }
+                                        ?>
+                                        <span class="badge badge-<?php echo $badgeClass; ?> px-3 py-2">
+                                            <?php echo $statusText; ?>
+                                        </span>
+                                    </td>
+                                    <td class="text-center">
+                                        <button type="button" class="btn btn-sm btn-outline-primary"
+                                                data-toggle="modal" data-target="#updateStatusModal<?php echo $data['id']; ?>"
+                                                title="Ubah Status">
+                                            <i class="fas fa-edit"></i>
                                         </button>
+                                    </td>
+                                </tr>
 
                                         <!-- Modal Update Status -->
                                         <div class="modal fade" id="updateStatusModal<?php echo $data['id']; ?>"
@@ -108,16 +156,23 @@ include 'includes/header/header.php';
                             } else {
                                 ?>
                                 <tr>
-                                    <td colspan="5" class="text-center">
-                                        <div class="alert alert-info">
-                                            Belum ada tugas yang disetujui. Silakan tunggu proses verifikasi.
+                                    <td colspan="6" class="text-center py-4">
+                                        <div class="text-center">
+                                            <i class="fas fa-inbox fa-3x text-gray-300 mb-3"></i>
+                                            <h5 class="text-gray-600">Belum Ada Tugas yang Disetujui</h5>
+                                            <p class="text-muted">Silakan tunggu proses verifikasi atau <a href="input_tugas.php">tambah tugas baru</a>.</p>
                                         </div>
                                     </td>
                                 </tr>
                                 <?php } ?>
                             </tbody>
-                    </table>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
+                <!-- /.container-fluid -->
 
             </div>
             <!-- End of Main Content -->
