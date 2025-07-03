@@ -81,12 +81,6 @@
                 <a class="nav-link" href="verifikasi.php">
                     <i class="fas fa-fw fa-clipboard-check"></i>
                     <span>Verifikasi & Approval</span>
-                    <?php
-                    // Gunakan fungsi untuk menghitung item pending
-                    require_once '../koneksi.php';
-                    $pending_counts = getPendingCounts();
-                    echo generateBadgeCounter($pending_counts['total']);
-                    ?>
                 </a>
             </li>
 

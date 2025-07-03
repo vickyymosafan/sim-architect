@@ -25,7 +25,7 @@ function getPendingCounts() {
     
     // Total pending
     $total_pending = $count_tugas + $count_file;
-    
+
     return [
         'tugas' => $count_tugas,
         'file' => $count_file,

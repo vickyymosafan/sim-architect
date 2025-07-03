@@ -50,17 +50,16 @@
 
                         <!-- Nav Item - Alerts -->
                         <li class="nav-item dropdown no-arrow mx-1">
-                            <a class="nav-link dropdown-toggle d-flex align-items-center justify-content-center"
+                            <a class="nav-link dropdown-toggle position-relative"
                                href="#" id="alertsDropdown" role="button"
-                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-                               style="position: relative; width: 3rem; height: 3rem;">
-                                <i class="fas fa-bell fa-fw text-gray-600" style="font-size: 1.1rem;"></i>
+                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-bell fa-fw"></i>
                                 <!-- Counter - Alerts -->
                                 <?php
                                 require_once '../koneksi.php';
                                 $pending_counts = getPendingCounts();
                                 if ($pending_counts['total'] > 0) {
-                                    echo '<span class="badge badge-danger badge-counter" style="position: absolute; top: 0.2rem; right: 0.2rem;">' . $pending_counts['total'] . '</span>';
+                                    echo '<span class="badge badge-danger badge-counter">' . $pending_counts['total'] . '</span>';
                                 }
                                 ?>
                             </a>

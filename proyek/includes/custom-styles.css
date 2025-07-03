@@ -59,25 +59,25 @@
 
 /* Badge Counter */
 .badge-counter {
-    font-size: 0.7rem;
     position: absolute;
-    top: -2px;
-    right: -6px;
+    top: 6px;
+    right: 6px;
+    font-size: 0.7rem;
     min-width: 1.2rem;
     height: 1.2rem;
     border-radius: 50%;
-    display: flex;
+    display: flex !important;
     align-items: center;
     justify-content: center;
-}
-
-/* Topbar Badge Counter - specific positioning for topbar */
-.topbar .badge-counter {
-    top: -8px;
-    right: -8px;
+    font-weight: 700;
+    line-height: 1;
     border: 2px solid #fff;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    z-index: 10;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.3);
+    z-index: 1001;
+    background-color: #dc3545 !important;
+    color: #fff !important;
+    visibility: visible !important;
+    opacity: 1 !important;
 }
 
 /* Breadcrumb Styling */
@@ -127,14 +127,100 @@
     box-shadow: 0 0.15rem 1.75rem 0 rgba(58, 59, 69, 0.15);
 }
 
-/* Topbar Notification Improvements */
-.topbar .nav-item.dropdown .nav-link {
-    position: relative;
-    padding: 0.5rem 1rem;
+/* Topbar Navigation Alignment */
+.topbar .navbar-nav {
+    align-items: center;
+    height: 100%;
 }
 
-.topbar .nav-item.dropdown .nav-link i {
+.topbar .nav-item {
+    display: flex;
+    align-items: center;
+    height: 100%;
+}
+
+.topbar .nav-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.75rem 1rem;
+    height: 3rem;
+    transition: all 0.2s ease;
+    position: relative;
+}
+
+.topbar .nav-link:hover {
+    background-color: rgba(0,0,0,0.05);
+    border-radius: 0.35rem;
+}
+
+.topbar .nav-link i {
     font-size: 1.1rem;
+    color: #5a5c69;
+}
+
+.topbar .nav-link:hover i {
+    color: #4e73df;
+}
+
+/* Ensure vertical centering for all topbar elements */
+.topbar {
+    min-height: 4.375rem;
+}
+
+.topbar .navbar-nav .nav-item .nav-link {
+    line-height: 1;
+}
+
+/* Special styling for notification bell */
+.topbar .nav-item.dropdown .nav-link {
+    min-width: 3rem;
+    position: relative;
+    overflow: visible;
+}
+
+/* Notification bell icon positioning */
+.topbar .nav-item.dropdown .nav-link i.fa-bell {
+    position: relative;
+    display: inline-block;
+}
+
+/* Badge positioning relative to bell icon */
+.topbar .nav-item.dropdown .nav-link .badge-counter {
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    transform: none;
+    visibility: visible !important;
+    opacity: 1 !important;
+    display: flex !important;
+}
+
+/* Ensure badge is always visible and positioned correctly */
+.topbar .nav-item.dropdown:hover .badge-counter,
+.topbar .nav-item.dropdown .nav-link:hover .badge-counter {
+    visibility: visible !important;
+    opacity: 1 !important;
+    display: flex !important;
+}
+
+/* User dropdown text alignment */
+.topbar .nav-item .nav-link span {
+    vertical-align: middle;
+}
+
+/* Profile image styling */
+.img-profile {
+    width: 2rem;
+    height: 2rem;
+    object-fit: cover;
+}
+
+/* Topbar divider alignment */
+.topbar-divider {
+    height: 2rem;
+    margin: auto 1rem;
+    align-self: center;
 }
 
 /* Notification Dropdown Styling */
@@ -153,12 +239,7 @@
     transition: all 0.2s ease;
 }
 
-/* Notification Bell Hover Effect */
-.topbar .nav-link:hover i {
-    color: #5a5c69 !important;
-    transform: scale(1.1);
-    transition: all 0.2s ease;
-}
+
 
 /* Notification Dropdown Header */
 .dropdown-header.bg-primary {
@@ -329,8 +410,24 @@
     }
 
     .topbar .nav-link {
-        width: 2.5rem;
         height: 2.5rem;
+        padding: 0.5rem 0.75rem;
+    }
+
+    .badge-counter {
+        min-width: 1rem;
+        height: 1rem;
+        font-size: 0.6rem;
+    }
+
+    .topbar .nav-item.dropdown .nav-link .badge-counter {
+        top: 0.2rem;
+        right: 0.2rem;
+    }
+
+    .img-profile {
+        width: 1.8rem;
+        height: 1.8rem;
     }
 }
 
