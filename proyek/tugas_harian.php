@@ -51,12 +51,12 @@ include 'includes/header/header.php';
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <thead class="thead-dark">
                                         <tr>
-                                            <th class="text-center" style="width: 5%;">No</th>
-                                            <th style="width: 25%;">Nama Tugas</th>
-                                            <th style="width: 35%;">Deskripsi</th>
-                                            <th class="text-center" style="width: 15%;">Tanggal</th>
-                                            <th class="text-center" style="width: 15%;">Status</th>
-                                            <th class="text-center" style="width: 5%;">Aksi</th>
+                                            <th class="text-center">No</th>
+                                            <th>Nama Tugas</th>
+                                            <th>Deskripsi</th>
+                                            <th class="text-center">Tanggal</th>
+                                            <th class="text-center">Status</th>
+                                            <th class="text-center">Aksi</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -74,7 +74,7 @@ include 'includes/header/header.php';
                                     <td class="text-center"><?php echo $no++; ?></td>
                                     <td class="font-weight-bold"><?php echo htmlspecialchars($data['nama_kegiatan']); ?></td>
                                     <td>
-                                        <div class="text-truncate" style="max-width: 300px;" title="<?php echo htmlspecialchars($data['deskripsi']); ?>">
+                                        <div class="text-truncate" title="<?php echo htmlspecialchars($data['deskripsi']); ?>">
                                             <?php echo htmlspecialchars($data['deskripsi']); ?>
                                         </div>
                                     </td>
@@ -112,45 +112,6 @@ include 'includes/header/header.php';
                                         </button>
                                     </td>
                                 </tr>
-
-                                        <!-- Modal Update Status -->
-                                        <div class="modal fade" id="updateStatusModal<?php echo $data['id']; ?>"
-                                            tabindex="-1" role="dialog"
-                                            aria-labelledby="statusModalLabel<?php echo $data['id']; ?>" aria-hidden="true">
-                                            <div class="modal-dialog" role="document">
-                                                <form action="update_tugas.php" method="POST">
-                                                    <input type="hidden" name="id" value="<?php echo $data['id']; ?>">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <h5 class="modal-title">Ubah Status</h5>
-                                                            <button type="button" class="close" data-dismiss="modal"
-                                                                aria-label="Close"><span>&times;</span></button>
-                                                        </div>
-                                                        <div class="modal-body">
-                                                            <select name="status" class="form-control" required>
-                                                                <option value="proses" <?php if ($status == 'proses')
-                                                                    echo 'selected'; ?>>Proses</option>
-                                                                <option value="selesai" <?php if ($status == 'selesai')
-                                                                    echo 'selected'; ?>>Selesai</option>
-                                                                <option value="batal" <?php if ($status == 'batal')
-                                                                    echo 'selected'; ?>>Batal</option>
-                                                            </select>
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                            <button type="submit" class="btn btn-primary">Simpan</button>
-                                                            <button type="button" class="btn btn-secondary"
-                                                                data-dismiss="modal">Batal</button>
-                                                        </div>
-                                                    </div>
-                                                </form>
-                                            </div>
-                                        </div>
-                                    </td>
-
-
-
-
-                                </tr>
                                 <?php
                                 }
                             } else {
@@ -173,6 +134,61 @@ include 'includes/header/header.php';
 
                 </div>
                 <!-- /.container-fluid -->
+
+                <!-- Modals for Update Status -->
+                <?php
+                // Reset query untuk modal
+                $sql_modal = mysqli_query($koneksi, "SELECT * FROM tugas_proyek WHERE status_verifikasi = 'approved' ORDER BY tgl DESC");
+                if (mysqli_num_rows($sql_modal) > 0) {
+                    while ($data_modal = mysqli_fetch_array($sql_modal)) {
+                        $status_modal = $data_modal['status'];
+                ?>
+                <!-- Modal Update Status -->
+                <div class="modal fade" id="updateStatusModal<?php echo $data_modal['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="statusModalLabel<?php echo $data_modal['id']; ?>" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="statusModalLabel<?php echo $data_modal['id']; ?>">
+                                    <i class="fas fa-edit mr-2"></i>Ubah Status Tugas
+                                </h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <form action="update_tugas.php" method="POST">
+                                <div class="modal-body">
+                                    <input type="hidden" name="id" value="<?php echo $data_modal['id']; ?>">
+
+                                    <div class="form-group">
+                                        <label for="status<?php echo $data_modal['id']; ?>" class="font-weight-bold">Status Tugas:</label>
+                                        <select name="status" id="status<?php echo $data_modal['id']; ?>" class="form-control" required>
+                                            <option value="proses" <?php echo ($status_modal == 'proses') ? 'selected' : ''; ?>>Dalam Proses</option>
+                                            <option value="selesai" <?php echo ($status_modal == 'selesai') ? 'selected' : ''; ?>>Selesai</option>
+                                            <option value="batal" <?php echo ($status_modal == 'batal') ? 'selected' : ''; ?>>Dibatalkan</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="alert alert-info">
+                                        <i class="fas fa-info-circle mr-2"></i>
+                                        <strong>Tugas:</strong> <?php echo htmlspecialchars($data_modal['nama_kegiatan']); ?>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                                        <i class="fas fa-times mr-2"></i>Batal
+                                    </button>
+                                    <button type="submit" class="btn btn-primary">
+                                        <i class="fas fa-save mr-2"></i>Simpan Perubahan
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <?php
+                    }
+                }
+                ?>
 
             </div>
             <!-- End of Main Content -->

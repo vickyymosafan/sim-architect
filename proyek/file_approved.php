@@ -52,13 +52,13 @@ include 'includes/header/header.php';
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <thead class="thead-dark">
                                         <tr>
-                                            <th class="text-center" style="width: 5%;">No</th>
-                                            <th style="width: 20%;">Nama File</th>
-                                            <th style="width: 25%;">Deskripsi</th>
-                                            <th class="text-center" style="width: 12%;">Tanggal Upload</th>
-                                            <th class="text-center" style="width: 12%;">Tanggal Disetujui</th>
-                                            <th class="text-center" style="width: 15%;">Disetujui Oleh</th>
-                                            <th class="text-center" style="width: 11%;">Aksi</th>
+                                            <th class="text-center">No</th>
+                                            <th>Nama File</th>
+                                            <th>Deskripsi</th>
+                                            <th class="text-center">Tanggal Upload</th>
+                                            <th class="text-center">Tanggal Disetujui</th>
+                                            <th class="text-center">Disetujui Oleh</th>
+                                            <th class="text-center">Aksi</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -96,7 +96,7 @@ include 'includes/header/header.php';
                                                 </div>
                                             </td>
                                             <td>
-                                                <div class="text-truncate" style="max-width: 250px;" title="<?php echo htmlspecialchars($data['deskripsi']); ?>">
+                                                <div class="text-truncate" title="<?php echo htmlspecialchars($data['deskripsi']); ?>">
                                                     <?php echo htmlspecialchars($data['deskripsi']); ?>
                                                 </div>
                                             </td>
