@@ -1,0 +1,45 @@
+# Exclude tmp directory (SB Admin 2 template files)
+tmp/
+
+# PHP specific
+*.log
+*.tmp
+*.cache
+
+# Database files
+*.sql.bak
+*.db
+
+# Configuration files (if sensitive)
+# config.php
+# koneksi.php
+
+# IDE and editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Backup files
+*.bak
+*.backup
+*.old
+
+# Upload directories (uncomment if needed)
+# file_proyek/
+# uploads/
+
+# Logs
+error.log
+access.log
+debug.log
