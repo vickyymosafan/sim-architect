@@ -5,12 +5,13 @@ $nama = $_POST['nama_kegiatan'];
 $des = $_POST['deskripsi'];
 $tgl = $_POST['tgl'];
 
-$sql = mysqli_query($koneksi, "INSERT INTO tugas_proyek(nama_kegiatan, deskripsi, tgl) VALUES('$nama','$des','$tgl')");
+// Insert dengan status_verifikasi default 'pending'
+$sql = mysqli_query($koneksi, "INSERT INTO tugas_proyek(nama_kegiatan, deskripsi, tgl, status_verifikasi) VALUES('$nama','$des','$tgl', 'pending')");
 
 if ($sql) {
     echo "<script>
-        alert('Data Berhasil Disimpan');
-        window.location.href = 'input_tugas.php';
+        alert('Tugas berhasil disimpan dan akan masuk ke antrian verifikasi!');
+        window.location.href = 'verifikasi.php';
     </script>";
 } else {
     echo "Gagal menyimpan data: " . mysqli_error($koneksi);

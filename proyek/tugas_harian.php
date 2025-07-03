@@ -13,7 +13,11 @@ include 'includes/header/header.php';
 
 <?php include 'includes/topbar/topbar.php'; ?>
                 <div class="container mt-5">
-                    <h2 class="mb-4">Lihat List Tugas Harian Proyek Arsitek</h2>
+                    <h2 class="mb-4">Daftar Tugas Harian yang Disetujui</h2>
+                    <div class="alert alert-info">
+                        <i class="fas fa-info-circle"></i>
+                        Halaman ini menampilkan tugas yang sudah melalui proses verifikasi dan disetujui.
+                    </div>
                     <table class="table table-bordered">
                         <thead class="thead-dark">
                             <tr>
@@ -29,9 +33,11 @@ include 'includes/header/header.php';
 
                             <?php
                             require '../koneksi.php';
-                            $sql = mysqli_query($koneksi, "select * from tugas_proyek");
-                            while ($data = mysqli_fetch_array($sql)) {
+                            // Hanya tampilkan tugas yang sudah disetujui (approved)
+                            $sql = mysqli_query($koneksi, "SELECT * FROM tugas_proyek WHERE status_verifikasi = 'approved' ORDER BY tgl DESC");
 
+                            if (mysqli_num_rows($sql) > 0) {
+                                while ($data = mysqli_fetch_array($sql)) {
                                 ?>
                                 <tr>
                                     <td><?php echo $data['id']; ?></td>
@@ -94,7 +100,19 @@ include 'includes/header/header.php';
 
 
                                 </tr>
-                            </tbody> <?php } ?>
+                                <?php
+                                }
+                            } else {
+                                ?>
+                                <tr>
+                                    <td colspan="5" class="text-center">
+                                        <div class="alert alert-info">
+                                            Belum ada tugas yang disetujui. Silakan tunggu proses verifikasi.
+                                        </div>
+                                    </td>
+                                </tr>
+                                <?php } ?>
+                            </tbody>
                     </table>
                 </div>
 

@@ -19,11 +19,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
 
         if (move_uploaded_file($file['tmp_name'], $targetFile)) {
-            $sql = "INSERT INTO file_gambar (deskripsi, gambar) VALUES ('$deskripsi', '$namaUnik')";
+            // Insert dengan status_verifikasi default 'pending'
+            $sql = "INSERT INTO file_gambar (deskripsi, gambar, status_verifikasi) VALUES ('$deskripsi', '$namaUnik', 'pending')";
             $query = mysqli_query($koneksi, $sql);
 
             if ($query) {
-                echo "<script>alert('File berhasil diupload!'); window.location.href='upload_file.php';</script>";
+                echo "<script>alert('File berhasil diupload dan akan masuk ke antrian verifikasi!'); window.location.href='verifikasi.php';</script>";
             } else {
                 echo "<div class='alert alert-danger'>Upload berhasil, tapi gagal simpan ke database: " . mysqli_error($koneksi) . "</div>";
             }

@@ -30,7 +30,12 @@ SET time_zone = "+00:00";
 CREATE TABLE `file_gambar` (
   `id` int(11) NOT NULL,
   `deskripsi` varchar(200) NOT NULL,
-  `gambar` varchar(200) NOT NULL
+  `gambar` varchar(200) NOT NULL,
+  `status_verifikasi` enum('pending','approved','rejected') NOT NULL DEFAULT 'pending',
+  `tanggal_submit` timestamp NOT NULL DEFAULT current_timestamp(),
+  `tanggal_verifikasi` timestamp NULL DEFAULT NULL,
+  `verifikator_id` int(11) DEFAULT NULL,
+  `catatan_verifikasi` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -102,12 +107,34 @@ CREATE TABLE `tugas_proyek` (
   `nama_kegiatan` varchar(200) NOT NULL,
   `deskripsi` varchar(200) NOT NULL,
   `tgl` date NOT NULL,
-  `status` enum('proses','selesai','batal','') NOT NULL
+  `status` enum('proses','selesai','batal') NOT NULL DEFAULT 'proses',
+  `status_verifikasi` enum('pending','approved','rejected') NOT NULL DEFAULT 'pending',
+  `tanggal_submit` timestamp NOT NULL DEFAULT current_timestamp(),
+  `tanggal_verifikasi` timestamp NULL DEFAULT NULL,
+  `verifikator_id` int(11) DEFAULT NULL,
+  `catatan_verifikasi` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data untuk tabel `tugas_proyek`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `verifikasi_log`
+--
+
+CREATE TABLE `verifikasi_log` (
+  `id` int(11) NOT NULL,
+  `tipe` enum('tugas','file') NOT NULL,
+  `item_id` int(11) NOT NULL,
+  `status_lama` enum('pending','approved','rejected') DEFAULT NULL,
+  `status_baru` enum('pending','approved','rejected') NOT NULL,
+  `verifikator_id` int(11) NOT NULL,
+  `catatan` text DEFAULT NULL,
+  `tanggal_verifikasi` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -168,6 +195,14 @@ ALTER TABLE `tugas_proyek`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indeks untuk tabel `verifikasi_log`
+--
+ALTER TABLE `verifikasi_log`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `idx_tipe_item` (`tipe`, `item_id`),
+  ADD KEY `fk_verifikasi_verifikator` (`verifikator_id`);
+
+--
 -- Indeks untuk tabel `users`
 --
 ALTER TABLE `users`
@@ -209,10 +244,29 @@ ALTER TABLE `tugas_proyek`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 
 --
+-- AUTO_INCREMENT untuk tabel `verifikasi_log`
+--
+ALTER TABLE `verifikasi_log`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+
+--
 -- AUTO_INCREMENT untuk tabel `users`
 --
 ALTER TABLE `users`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- Menambahkan foreign key constraints
+--
+ALTER TABLE `file_gambar`
+  ADD CONSTRAINT `fk_file_verifikator` FOREIGN KEY (`verifikator_id`) REFERENCES `petugas` (`id_petugas`) ON DELETE SET NULL;
+
+ALTER TABLE `tugas_proyek`
+  ADD CONSTRAINT `fk_tugas_verifikator` FOREIGN KEY (`verifikator_id`) REFERENCES `petugas` (`id_petugas`) ON DELETE SET NULL;
+
+ALTER TABLE `verifikasi_log`
+  ADD CONSTRAINT `fk_verifikasi_verifikator` FOREIGN KEY (`verifikator_id`) REFERENCES `petugas` (`id_petugas`) ON DELETE CASCADE;
+
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

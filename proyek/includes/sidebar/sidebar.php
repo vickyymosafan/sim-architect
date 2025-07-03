@@ -30,27 +30,33 @@
             
              <li class="nav-item">
                 <a class="nav-link" href="tugas_harian.php">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <i class="fas fa-fw fa-tasks"></i>
                     <span>Tugas harian</span></a>
             </li>
 
             
              <li class="nav-item">
                 <a class="nav-link" href="upload_file.php">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Upload file desain</span></a>     
+                    <i class="fas fa-fw fa-upload"></i>
+                    <span>Upload file desain</span></a>
             </li>
-            
+
+             <li class="nav-item">
+                <a class="nav-link" href="file_approved.php">
+                    <i class="fas fa-fw fa-check-circle"></i>
+                    <span>File Disetujui</span></a>
+            </li>
+
              <li class="nav-item">
                 <a class="nav-link" href="verifikasi.php">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Verifikasi</span></a>    
+                    <i class="fas fa-fw fa-clipboard-check"></i>
+                    <span>Verifikasi</span></a>
             </li>
 
             <li class="nav-item">
                 <a class="nav-link" href="input_tugas.php">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Input tugas harian</span></a>    
+                    <i class="fas fa-fw fa-plus-circle"></i>
+                    <span>Input tugas harian</span></a>
             </li>
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
