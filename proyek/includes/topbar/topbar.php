@@ -7,14 +7,15 @@
                     </button>
 
                     <!-- Page Title & Breadcrumb -->
-                    <div class="d-flex align-items-center">
-                        <h1 class="h3 mb-0 text-gray-800 mr-3">
-                            <?php echo isset($page_title) ? $page_title : 'Dashboard Proyek'; ?>
-                        </h1>
+                    <div class="d-flex align-items-center flex-grow-1">
+                        <div class="mr-auto">
+                            <h1 class="h3 mb-0 text-gray-800">
+                                <?php echo isset($page_title) ? $page_title : 'Dashboard Proyek'; ?>
+                            </h1>
 
-                        <!-- Breadcrumb -->
-                        <nav aria-label="breadcrumb">
-                            <ol class="breadcrumb mb-0 bg-transparent p-0">
+                            <!-- Breadcrumb -->
+                            <nav aria-label="breadcrumb" class="mt-1">
+                                <ol class="breadcrumb mb-0 bg-transparent p-0 small">
                                 <li class="breadcrumb-item">
                                     <a href="proyek.php"><i class="fas fa-home"></i> Dashboard</a>
                                 </li>
@@ -39,8 +40,9 @@
                                     }
                                 }
                                 ?>
-                            </ol>
-                        </nav>
+                                </ol>
+                            </nav>
+                        </div>
                     </div>
 
                     <!-- Topbar Navbar -->
@@ -48,9 +50,11 @@
 
                         <!-- Nav Item - Alerts -->
                         <li class="nav-item dropdown no-arrow mx-1">
-                            <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="fas fa-bell fa-fw"></i>
+                            <a class="nav-link dropdown-toggle d-flex align-items-center justify-content-center"
+                               href="#" id="alertsDropdown" role="button"
+                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+                               style="position: relative; width: 3rem; height: 3rem;">
+                                <i class="fas fa-bell fa-fw text-gray-600" style="font-size: 1.1rem;"></i>
                                 <!-- Counter - Alerts -->
                                 <?php
                                 require_once '../koneksi.php';
@@ -58,52 +62,69 @@
                                 $count_file = mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM file_gambar WHERE status_verifikasi = 'pending'"));
                                 $total_pending = $count_tugas + $count_file;
                                 if ($total_pending > 0) {
-                                    echo '<span class="badge badge-danger badge-counter">' . $total_pending . '</span>';
+                                    echo '<span class="badge badge-danger badge-counter" style="position: absolute; top: 0.2rem; right: 0.2rem;">' . $total_pending . '</span>';
                                 }
                                 ?>
                             </a>
                             <!-- Dropdown - Alerts -->
                             <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
-                                aria-labelledby="alertsDropdown">
-                                <h6 class="dropdown-header">
-                                    Notifikasi Verifikasi
+                                aria-labelledby="alertsDropdown" style="min-width: 20rem;">
+                                <h6 class="dropdown-header bg-primary text-white">
+                                    <i class="fas fa-bell mr-2"></i>Notifikasi Verifikasi
                                 </h6>
                                 <?php if ($count_tugas > 0): ?>
-                                <a class="dropdown-item d-flex align-items-center" href="verifikasi.php">
+                                <a class="dropdown-item d-flex align-items-center py-3 border-bottom" href="verifikasi.php">
                                     <div class="mr-3">
                                         <div class="icon-circle bg-warning">
                                             <i class="fas fa-tasks text-white"></i>
                                         </div>
                                     </div>
-                                    <div>
-                                        <div class="small text-gray-500"><?php echo date('d M Y'); ?></div>
-                                        <span class="font-weight-bold"><?php echo $count_tugas; ?> tugas menunggu verifikasi</span>
+                                    <div class="flex-grow-1">
+                                        <div class="small text-gray-500 mb-1">
+                                            <i class="fas fa-clock mr-1"></i><?php echo date('d M Y, H:i'); ?>
+                                        </div>
+                                        <span class="font-weight-bold text-dark">
+                                            <?php echo $count_tugas; ?> tugas menunggu verifikasi
+                                        </span>
+                                    </div>
+                                    <div class="ml-2">
+                                        <i class="fas fa-chevron-right text-gray-400"></i>
                                     </div>
                                 </a>
                                 <?php endif; ?>
 
                                 <?php if ($count_file > 0): ?>
-                                <a class="dropdown-item d-flex align-items-center" href="verifikasi.php">
+                                <a class="dropdown-item d-flex align-items-center py-3 border-bottom" href="verifikasi.php">
                                     <div class="mr-3">
                                         <div class="icon-circle bg-info">
                                             <i class="fas fa-file text-white"></i>
                                         </div>
                                     </div>
-                                    <div>
-                                        <div class="small text-gray-500"><?php echo date('d M Y'); ?></div>
-                                        <span class="font-weight-bold"><?php echo $count_file; ?> file menunggu verifikasi</span>
+                                    <div class="flex-grow-1">
+                                        <div class="small text-gray-500 mb-1">
+                                            <i class="fas fa-clock mr-1"></i><?php echo date('d M Y, H:i'); ?>
+                                        </div>
+                                        <span class="font-weight-bold text-dark">
+                                            <?php echo $count_file; ?> file menunggu verifikasi
+                                        </span>
+                                    </div>
+                                    <div class="ml-2">
+                                        <i class="fas fa-chevron-right text-gray-400"></i>
                                     </div>
                                 </a>
                                 <?php endif; ?>
 
                                 <?php if ($total_pending == 0): ?>
-                                <div class="dropdown-item text-center small text-gray-500">
-                                    Tidak ada notifikasi baru
+                                <div class="dropdown-item text-center py-4">
+                                    <i class="fas fa-check-circle fa-2x text-success mb-2"></i>
+                                    <div class="small text-gray-500">Tidak ada notifikasi baru</div>
                                 </div>
                                 <?php endif; ?>
 
-                                <a class="dropdown-item text-center small text-gray-500" href="verifikasi.php">
-                                    Lihat Semua Verifikasi
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item text-center py-3 bg-light" href="verifikasi.php">
+                                    <i class="fas fa-eye mr-2"></i>
+                                    <span class="font-weight-bold">Lihat Semua Verifikasi</span>
                                 </a>
                             </div>
                         </li>

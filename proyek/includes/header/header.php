@@ -65,8 +65,17 @@
         .badge-counter {
             font-size: 0.7rem;
             position: absolute;
-            top: -2px;
-            right: -6px;
+            top: -8px;
+            right: -8px;
+            min-width: 1.2rem;
+            height: 1.2rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid #fff;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            z-index: 10;
         }
 
         .breadcrumb {
@@ -89,6 +98,70 @@
 
         .dropdown-list {
             max-width: 20rem;
+            min-width: 18rem;
+        }
+
+        /* Topbar notification improvements */
+        .topbar .nav-item.dropdown .nav-link {
+            position: relative;
+            padding: 0.5rem 1rem;
+        }
+
+        .topbar .nav-item.dropdown .nav-link i {
+            font-size: 1.1rem;
+        }
+
+        /* Notification dropdown styling */
+        .dropdown-item.d-flex {
+            padding: 0.75rem 1rem;
+            border-bottom: 1px solid #e3e6f0;
+        }
+
+        .dropdown-item.d-flex:last-child {
+            border-bottom: none;
+        }
+
+        .dropdown-item.d-flex:hover {
+            background-color: #f8f9fc;
+            transform: translateX(2px);
+            transition: all 0.2s ease;
+        }
+
+        /* Notification bell hover effect */
+        .topbar .nav-link:hover i {
+            color: #5a5c69 !important;
+            transform: scale(1.1);
+            transition: all 0.2s ease;
+        }
+
+        /* Notification dropdown header */
+        .dropdown-header.bg-primary {
+            margin: 0;
+            border-radius: 0.35rem 0.35rem 0 0;
+        }
+
+        /* Icon circle in notifications */
+        .icon-circle {
+            width: 2.5rem;
+            height: 2.5rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        /* Responsive notification layout */
+        @media (max-width: 768px) {
+            .dropdown-list {
+                min-width: 16rem;
+                max-width: 90vw;
+            }
+
+            .topbar .nav-link {
+                width: 2.5rem;
+                height: 2.5rem;
+            }
         }
 
         .nav-item.active .nav-link {
