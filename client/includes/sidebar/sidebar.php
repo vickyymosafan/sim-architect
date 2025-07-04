@@ -30,7 +30,7 @@
             <!-- Nav Item - Progress Proyek -->
             <li class="nav-item <?php echo (basename($_SERVER['PHP_SELF']) == 'progress_proyek.php') ? 'active' : ''; ?>">
                 <a class="nav-link" href="progress_proyek.php">
-                    <i class="fas fa-fw fa-chart-gantt"></i>
+                    <i class="fas fa-fw fa-tasks"></i>
                     <span>Progress Proyek</span></a>
             </li>
 
