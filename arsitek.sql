@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 23 Jun 2025 pada 07.44
--- Versi server: 10.4.32-MariaDB
--- Versi PHP: 8.2.12
+-- Generation Time: Jul 04, 2025 at 01:26 PM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,7 +24,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `file_gambar`
+-- Table structure for table `file_gambar`
 --
 
 CREATE TABLE `file_gambar` (
@@ -38,19 +38,10 @@ CREATE TABLE `file_gambar` (
   `catatan_verifikasi` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data untuk tabel `file_gambar`
---
-
-INSERT INTO `file_gambar` (`id`, `deskripsi`, `gambar`, `status_verifikasi`, `tanggal_submit`, `tanggal_verifikasi`, `verifikator_id`, `catatan_verifikasi`) VALUES
-(1, 'Desain Denah Lantai 1', 'denah_lantai_1.pdf', 'approved', '2025-06-20 08:00:00', '2025-06-20 10:30:00', 2, 'Desain sudah sesuai dengan spesifikasi'),
-(2, 'Tampak Depan Bangunan', 'tampak_depan.jpg', 'approved', '2025-06-21 09:15:00', '2025-06-21 14:20:00', 2, 'Desain tampak depan sudah bagus'),
-(3, 'Detail Struktur Atap', 'struktur_atap.dwg', 'approved', '2025-06-22 07:45:00', '2025-06-22 16:10:00', 2, 'Detail struktur sudah sesuai standar');
-
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `login_logs`
+-- Table structure for table `login_logs`
 --
 
 CREATE TABLE `login_logs` (
@@ -62,14 +53,10 @@ CREATE TABLE `login_logs` (
   `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data untuk tabel `login_logs`
---
-
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `password_resets`
+-- Table structure for table `password_resets`
 --
 
 CREATE TABLE `password_resets` (
@@ -82,7 +69,7 @@ CREATE TABLE `password_resets` (
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `petugas`
+-- Table structure for table `petugas`
 --
 
 CREATE TABLE `petugas` (
@@ -94,7 +81,7 @@ CREATE TABLE `petugas` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data untuk tabel `petugas`
+-- Dumping data for table `petugas`
 --
 
 INSERT INTO `petugas` (`id_petugas`, `nama_petugas`, `username`, `password`, `level`) VALUES
@@ -104,7 +91,63 @@ INSERT INTO `petugas` (`id_petugas`, `nama_petugas`, `username`, `password`, `le
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tugas_proyek`
+-- Table structure for table `rab_proyek`
+--
+
+CREATE TABLE `rab_proyek` (
+  `id` int(11) NOT NULL,
+  `client_id` int(11) NOT NULL,
+  `nama_proyek` varchar(255) NOT NULL,
+  `deskripsi` text DEFAULT NULL,
+  `file_rab` varchar(255) NOT NULL,
+  `file_size` int(11) DEFAULT NULL,
+  `file_type` varchar(50) DEFAULT NULL,
+  `status` enum('draft','approved','rejected') DEFAULT 'draft',
+  `tanggal_upload` timestamp NOT NULL DEFAULT current_timestamp(),
+  `tanggal_verifikasi` timestamp NULL DEFAULT NULL,
+  `verifikator_id` int(11) DEFAULT NULL,
+  `catatan_verifikasi` text DEFAULT NULL,
+  `created_by` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `revisi_quota`
+--
+
+CREATE TABLE `revisi_quota` (
+  `id` int(11) NOT NULL,
+  `client_id` int(11) NOT NULL,
+  `tanggal` date NOT NULL,
+  `jumlah_request` int(11) DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `revisi_request`
+--
+
+CREATE TABLE `revisi_request` (
+  `id` int(11) NOT NULL,
+  `client_id` int(11) NOT NULL,
+  `item_type` enum('tugas','file') NOT NULL,
+  `item_id` int(11) NOT NULL,
+  `alasan_revisi` text NOT NULL,
+  `detail_perubahan` text DEFAULT NULL,
+  `file_referensi` varchar(255) DEFAULT NULL,
+  `status_revisi` enum('pending','approved','rejected') DEFAULT 'pending',
+  `tanggal_request` timestamp NOT NULL DEFAULT current_timestamp(),
+  `tanggal_response` timestamp NULL DEFAULT NULL,
+  `reviewer_id` int(11) DEFAULT NULL,
+  `catatan_reviewer` text DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tugas_proyek`
 --
 
 CREATE TABLE `tugas_proyek` (
@@ -120,117 +163,10 @@ CREATE TABLE `tugas_proyek` (
   `catatan_verifikasi` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data untuk tabel `tugas_proyek`
---
-
-INSERT INTO `tugas_proyek` (`id`, `nama_kegiatan`, `deskripsi`, `tgl`, `status`, `status_verifikasi`, `tanggal_submit`, `tanggal_verifikasi`, `verifikator_id`, `catatan_verifikasi`) VALUES
-(1, 'Survey Lokasi', 'Melakukan survey dan pengukuran lokasi proyek', '2025-06-15', 'selesai', 'approved', '2025-06-15 08:00:00', '2025-06-15 16:30:00', 2, 'Survey sudah lengkap dan akurat'),
-(2, 'Pembuatan Desain Awal', 'Membuat konsep desain awal berdasarkan hasil survey', '2025-06-18', 'selesai', 'approved', '2025-06-18 09:00:00', '2025-06-18 17:00:00', 2, 'Desain awal sudah sesuai brief client'),
-(3, 'Revisi Desain', 'Melakukan revisi desain berdasarkan feedback client', '2025-06-20', 'proses', 'approved', '2025-06-20 08:30:00', '2025-06-20 11:00:00', 2, 'Revisi dapat dilanjutkan'),
-(4, 'Finalisasi Gambar Kerja', 'Menyelesaikan gambar kerja untuk pelaksanaan', '2025-06-25', 'proses', 'approved', '2025-06-22 10:00:00', '2025-06-22 15:45:00', 2, 'Dapat dilanjutkan ke tahap finalisasi'),
-(5, 'Perhitungan RAB', 'Menghitung Rencana Anggaran Biaya proyek', '2025-06-28', 'proses', 'approved', '2025-06-23 08:00:00', '2025-06-23 12:30:00', 2, 'RAB dapat mulai dihitung');
-
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `verifikasi_log`
---
-
-CREATE TABLE `verifikasi_log` (
-  `id` int(11) NOT NULL,
-  `tipe` enum('tugas','file') NOT NULL,
-  `item_id` int(11) NOT NULL,
-  `status_lama` enum('pending','approved','rejected') DEFAULT NULL,
-  `status_baru` enum('pending','approved','rejected') NOT NULL,
-  `verifikator_id` int(11) NOT NULL,
-  `catatan` text DEFAULT NULL,
-  `tanggal_verifikasi` timestamp NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
--- Struktur dari tabel `revisi_request`
---
-
-CREATE TABLE `revisi_request` (
-  `id` int(11) NOT NULL,
-  `client_id` int(11) NOT NULL,
-  `item_type` enum('tugas','file') NOT NULL,
-  `item_id` int(11) NOT NULL,
-  `alasan_revisi` text NOT NULL,
-  `detail_perubahan` text,
-  `file_referensi` varchar(255) DEFAULT NULL,
-  `status_revisi` enum('pending','approved','rejected') DEFAULT 'pending',
-  `tanggal_request` timestamp NOT NULL DEFAULT current_timestamp(),
-  `tanggal_response` timestamp NULL DEFAULT NULL,
-  `reviewer_id` int(11) DEFAULT NULL,
-  `catatan_reviewer` text DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data untuk tabel `revisi_request`
---
-
-INSERT INTO `revisi_request` (`id`, `client_id`, `item_type`, `item_id`, `alasan_revisi`, `detail_perubahan`, `status_revisi`) VALUES
-(1, 1, 'file', 1, 'Perlu penyesuaian ukuran ruangan', 'Ruang tamu diperbesar 2x3 meter', 'pending'),
-(2, 1, 'tugas', 2, 'Perlu revisi konsep desain', 'Ganti tema dari minimalis ke modern', 'pending');
-
--- --------------------------------------------------------
-
---
--- Struktur dari tabel `revisi_quota`
---
-
-CREATE TABLE `revisi_quota` (
-  `id` int(11) NOT NULL,
-  `client_id` int(11) NOT NULL,
-  `tanggal` date NOT NULL,
-  `jumlah_request` int(11) DEFAULT 0
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data untuk tabel `revisi_quota`
---
-
-INSERT INTO `revisi_quota` (`id`, `client_id`, `tanggal`, `jumlah_request`) VALUES
-(1, 1, CURDATE(), 2);
-
--- --------------------------------------------------------
-
---
--- Struktur dari tabel `rab_proyek`
---
-
-CREATE TABLE `rab_proyek` (
-  `id` int(11) NOT NULL,
-  `client_id` int(11) NOT NULL,
-  `nama_proyek` varchar(255) NOT NULL,
-  `deskripsi` text,
-  `file_rab` varchar(255) NOT NULL,
-  `file_size` int(11) DEFAULT NULL,
-  `file_type` varchar(50) DEFAULT NULL,
-  `status` enum('draft','approved','rejected') DEFAULT 'draft',
-  `tanggal_upload` timestamp NOT NULL DEFAULT current_timestamp(),
-  `tanggal_verifikasi` timestamp NULL DEFAULT NULL,
-  `verifikator_id` int(11) DEFAULT NULL,
-  `catatan_verifikasi` text DEFAULT NULL,
-  `created_by` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data untuk tabel `rab_proyek`
---
-
-INSERT INTO `rab_proyek` (`id`, `client_id`, `nama_proyek`, `deskripsi`, `file_rab`, `file_size`, `file_type`, `status`, `tanggal_upload`, `tanggal_verifikasi`, `verifikator_id`, `catatan_verifikasi`, `created_by`) VALUES
-(1, 1, 'Rumah Minimalis 2 Lantai', 'RAB untuk pembangunan rumah minimalis 2 lantai dengan luas 120m2', 'rab_1_1735123200.pdf', 2048576, 'application/pdf', 'approved', '2025-06-24 08:00:00', '2025-06-24 16:00:00', 2, 'RAB sudah sesuai dengan spesifikasi dan budget client', 2),
-(2, 1, 'Renovasi Dapur Modern', 'RAB untuk renovasi dapur dengan konsep modern minimalis', 'rab_1_1735209600.xlsx', 1024000, 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', 'draft', '2025-06-25 10:00:00', NULL, NULL, NULL, 2);
-
--- --------------------------------------------------------
-
---
--- Struktur dari tabel `users`
+-- Table structure for table `users`
 --
 
 CREATE TABLE `users` (
@@ -244,75 +180,55 @@ CREATE TABLE `users` (
   `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+-- --------------------------------------------------------
+
 --
--- Dumping data untuk tabel `users`
+-- Table structure for table `verifikasi_log`
 --
 
-INSERT INTO `users` (`id`, `first_name`, `last_name`, `username`, `email`, `password`, `role`, `created_at`) VALUES
-(1, 'Client', 'Demo', 'client_demo', 'client@demo.com', '$2y$10$T4JDiPA62j/UIyd7alP62uPnBaH3A6Ia7ImTbvb6smSSM6X9Yy60q', 'client', '2025-06-07 12:58:37');
+CREATE TABLE `verifikasi_log` (
+  `id` int(11) NOT NULL,
+  `tipe` enum('tugas','file') NOT NULL,
+  `item_id` int(11) NOT NULL,
+  `status_lama` enum('pending','approved','rejected') DEFAULT NULL,
+  `status_baru` enum('pending','approved','rejected') NOT NULL,
+  `verifikator_id` int(11) NOT NULL,
+  `catatan` text DEFAULT NULL,
+  `tanggal_verifikasi` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Indexes for dumped tables
 --
 
 --
--- Indeks untuk tabel `file_gambar`
+-- Indexes for table `file_gambar`
 --
 ALTER TABLE `file_gambar`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_file_verifikator` (`verifikator_id`);
 
 --
--- Indeks untuk tabel `login_logs`
+-- Indexes for table `login_logs`
 --
 ALTER TABLE `login_logs`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `password_resets`
+-- Indexes for table `password_resets`
 --
 ALTER TABLE `password_resets`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `petugas`
+-- Indexes for table `petugas`
 --
 ALTER TABLE `petugas`
   ADD PRIMARY KEY (`id_petugas`),
   ADD UNIQUE KEY `username` (`username`);
 
 --
--- Indeks untuk tabel `tugas_proyek`
---
-ALTER TABLE `tugas_proyek`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indeks untuk tabel `verifikasi_log`
---
-ALTER TABLE `verifikasi_log`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `idx_tipe_item` (`tipe`, `item_id`),
-  ADD KEY `fk_verifikasi_verifikator` (`verifikator_id`);
-
---
--- Indeks untuk tabel `revisi_request`
---
-ALTER TABLE `revisi_request`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `fk_revisi_client` (`client_id`),
-  ADD KEY `fk_revisi_reviewer` (`reviewer_id`),
-  ADD KEY `idx_item_type_id` (`item_type`, `item_id`);
-
---
--- Indeks untuk tabel `revisi_quota`
---
-ALTER TABLE `revisi_quota`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `unique_client_date` (`client_id`, `tanggal`),
-  ADD KEY `fk_quota_client` (`client_id`);
-
---
--- Indeks untuk tabel `rab_proyek`
+-- Indexes for table `rab_proyek`
 --
 ALTER TABLE `rab_proyek`
   ADD PRIMARY KEY (`id`),
@@ -321,7 +237,31 @@ ALTER TABLE `rab_proyek`
   ADD KEY `fk_rab_creator` (`created_by`);
 
 --
--- Indeks untuk tabel `users`
+-- Indexes for table `revisi_quota`
+--
+ALTER TABLE `revisi_quota`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `unique_client_date` (`client_id`,`tanggal`),
+  ADD KEY `fk_quota_client` (`client_id`);
+
+--
+-- Indexes for table `revisi_request`
+--
+ALTER TABLE `revisi_request`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_revisi_client` (`client_id`),
+  ADD KEY `fk_revisi_reviewer` (`reviewer_id`),
+  ADD KEY `idx_item_type_id` (`item_type`,`item_id`);
+
+--
+-- Indexes for table `tugas_proyek`
+--
+ALTER TABLE `tugas_proyek`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_tugas_verifikator` (`verifikator_id`);
+
+--
+-- Indexes for table `users`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`),
@@ -329,93 +269,119 @@ ALTER TABLE `users`
   ADD UNIQUE KEY `email` (`email`);
 
 --
--- AUTO_INCREMENT untuk tabel yang dibuang
+-- Indexes for table `verifikasi_log`
+--
+ALTER TABLE `verifikasi_log`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `idx_tipe_item` (`tipe`,`item_id`),
+  ADD KEY `fk_verifikasi_verifikator` (`verifikator_id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT untuk tabel `file_gambar`
+-- AUTO_INCREMENT for table `file_gambar`
 --
 ALTER TABLE `file_gambar`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT untuk tabel `login_logs`
+-- AUTO_INCREMENT for table `login_logs`
 --
 ALTER TABLE `login_logs`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT untuk tabel `password_resets`
+-- AUTO_INCREMENT for table `password_resets`
 --
 ALTER TABLE `password_resets`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT untuk tabel `petugas`
+-- AUTO_INCREMENT for table `petugas`
 --
 ALTER TABLE `petugas`
   MODIFY `id_petugas` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT untuk tabel `tugas_proyek`
+-- AUTO_INCREMENT for table `rab_proyek`
+--
+ALTER TABLE `rab_proyek`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `revisi_quota`
+--
+ALTER TABLE `revisi_quota`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `revisi_request`
+--
+ALTER TABLE `revisi_request`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `tugas_proyek`
 --
 ALTER TABLE `tugas_proyek`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT untuk tabel `verifikasi_log`
---
-ALTER TABLE `verifikasi_log`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
-
---
--- AUTO_INCREMENT untuk tabel `revisi_request`
---
-ALTER TABLE `revisi_request`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
--- AUTO_INCREMENT untuk tabel `revisi_quota`
---
-ALTER TABLE `revisi_quota`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
--- AUTO_INCREMENT untuk tabel `rab_proyek`
---
-ALTER TABLE `rab_proyek`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
--- AUTO_INCREMENT untuk tabel `users`
+-- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- Menambahkan foreign key constraints
+-- AUTO_INCREMENT for table `verifikasi_log`
+--
+ALTER TABLE `verifikasi_log`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `file_gambar`
 --
 ALTER TABLE `file_gambar`
   ADD CONSTRAINT `fk_file_verifikator` FOREIGN KEY (`verifikator_id`) REFERENCES `petugas` (`id_petugas`) ON DELETE SET NULL;
 
-ALTER TABLE `tugas_proyek`
-  ADD CONSTRAINT `fk_tugas_verifikator` FOREIGN KEY (`verifikator_id`) REFERENCES `petugas` (`id_petugas`) ON DELETE SET NULL;
+--
+-- Constraints for table `rab_proyek`
+--
+ALTER TABLE `rab_proyek`
+  ADD CONSTRAINT `fk_rab_client` FOREIGN KEY (`client_id`) REFERENCES `users` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `fk_rab_creator` FOREIGN KEY (`created_by`) REFERENCES `petugas` (`id_petugas`) ON DELETE SET NULL,
+  ADD CONSTRAINT `fk_rab_verifikator` FOREIGN KEY (`verifikator_id`) REFERENCES `petugas` (`id_petugas`) ON DELETE SET NULL;
 
-ALTER TABLE `verifikasi_log`
-  ADD CONSTRAINT `fk_verifikasi_verifikator` FOREIGN KEY (`verifikator_id`) REFERENCES `petugas` (`id_petugas`) ON DELETE CASCADE;
+--
+-- Constraints for table `revisi_quota`
+--
+ALTER TABLE `revisi_quota`
+  ADD CONSTRAINT `fk_quota_client` FOREIGN KEY (`client_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
 
+--
+-- Constraints for table `revisi_request`
+--
 ALTER TABLE `revisi_request`
   ADD CONSTRAINT `fk_revisi_client` FOREIGN KEY (`client_id`) REFERENCES `users` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `fk_revisi_reviewer` FOREIGN KEY (`reviewer_id`) REFERENCES `petugas` (`id_petugas`) ON DELETE SET NULL;
 
-ALTER TABLE `revisi_quota`
-  ADD CONSTRAINT `fk_quota_client` FOREIGN KEY (`client_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
+--
+-- Constraints for table `tugas_proyek`
+--
+ALTER TABLE `tugas_proyek`
+  ADD CONSTRAINT `fk_tugas_verifikator` FOREIGN KEY (`verifikator_id`) REFERENCES `petugas` (`id_petugas`) ON DELETE SET NULL;
 
-ALTER TABLE `rab_proyek`
-  ADD CONSTRAINT `fk_rab_client` FOREIGN KEY (`client_id`) REFERENCES `users` (`id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `fk_rab_verifikator` FOREIGN KEY (`verifikator_id`) REFERENCES `petugas` (`id_petugas`) ON DELETE SET NULL,
-  ADD CONSTRAINT `fk_rab_creator` FOREIGN KEY (`created_by`) REFERENCES `petugas` (`id_petugas`) ON DELETE SET NULL;
-
+--
+-- Constraints for table `verifikasi_log`
+--
+ALTER TABLE `verifikasi_log`
+  ADD CONSTRAINT `fk_verifikasi_verifikator` FOREIGN KEY (`verifikator_id`) REFERENCES `petugas` (`id_petugas`) ON DELETE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
