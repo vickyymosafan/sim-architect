@@ -131,7 +131,7 @@ include 'includes/header/header.php';
                                             
                                             if (in_array($file_ext, ['jpg', 'jpeg', 'png', 'gif'])) {
                                                 $file_icon = 'fas fa-file-image';
-                                                $is_image = true;
+                                                $is_image = false; // Ubah ke false agar menampilkan ikon
                                             } elseif ($file_ext == 'pdf') {
                                                 $file_icon = 'fas fa-file-pdf';
                                             } elseif (in_array($file_ext, ['dwg', 'obj', 'stl'])) {
