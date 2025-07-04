@@ -35,6 +35,13 @@
                     <span>Kelola User Proyek</span></a>
             </li>
 
+            <!-- Nav Item - Kelola Client -->
+            <li class="nav-item">
+                <a class="nav-link" href="kelola_client.php">
+                    <i class="fas fa-fw fa-user-tie"></i>
+                    <span>Kelola Client</span></a>
+            </li>
+
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
 

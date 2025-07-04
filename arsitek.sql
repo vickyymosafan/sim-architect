@@ -42,6 +42,11 @@ CREATE TABLE `file_gambar` (
 -- Dumping data untuk tabel `file_gambar`
 --
 
+INSERT INTO `file_gambar` (`id`, `deskripsi`, `gambar`, `status_verifikasi`, `tanggal_submit`, `tanggal_verifikasi`, `verifikator_id`, `catatan_verifikasi`) VALUES
+(1, 'Desain Denah Lantai 1', 'denah_lantai_1.pdf', 'approved', '2025-06-20 08:00:00', '2025-06-20 10:30:00', 2, 'Desain sudah sesuai dengan spesifikasi'),
+(2, 'Tampak Depan Bangunan', 'tampak_depan.jpg', 'approved', '2025-06-21 09:15:00', '2025-06-21 14:20:00', 2, 'Desain tampak depan sudah bagus'),
+(3, 'Detail Struktur Atap', 'struktur_atap.dwg', 'approved', '2025-06-22 07:45:00', '2025-06-22 16:10:00', 2, 'Detail struktur sudah sesuai standar');
+
 -- --------------------------------------------------------
 
 --
@@ -85,7 +90,7 @@ CREATE TABLE `petugas` (
   `nama_petugas` varchar(200) NOT NULL,
   `username` varchar(100) NOT NULL,
   `password` varchar(200) NOT NULL,
-  `level` enum('proyek','admin') NOT NULL DEFAULT 'proyek'
+  `level` enum('proyek','admin','client') NOT NULL DEFAULT 'proyek'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -119,6 +124,13 @@ CREATE TABLE `tugas_proyek` (
 -- Dumping data untuk tabel `tugas_proyek`
 --
 
+INSERT INTO `tugas_proyek` (`id`, `nama_kegiatan`, `deskripsi`, `tgl`, `status`, `status_verifikasi`, `tanggal_submit`, `tanggal_verifikasi`, `verifikator_id`, `catatan_verifikasi`) VALUES
+(1, 'Survey Lokasi', 'Melakukan survey dan pengukuran lokasi proyek', '2025-06-15', 'selesai', 'approved', '2025-06-15 08:00:00', '2025-06-15 16:30:00', 2, 'Survey sudah lengkap dan akurat'),
+(2, 'Pembuatan Desain Awal', 'Membuat konsep desain awal berdasarkan hasil survey', '2025-06-18', 'selesai', 'approved', '2025-06-18 09:00:00', '2025-06-18 17:00:00', 2, 'Desain awal sudah sesuai brief client'),
+(3, 'Revisi Desain', 'Melakukan revisi desain berdasarkan feedback client', '2025-06-20', 'proses', 'approved', '2025-06-20 08:30:00', '2025-06-20 11:00:00', 2, 'Revisi dapat dilanjutkan'),
+(4, 'Finalisasi Gambar Kerja', 'Menyelesaikan gambar kerja untuk pelaksanaan', '2025-06-25', 'proses', 'approved', '2025-06-22 10:00:00', '2025-06-22 15:45:00', 2, 'Dapat dilanjutkan ke tahap finalisasi'),
+(5, 'Perhitungan RAB', 'Menghitung Rencana Anggaran Biaya proyek', '2025-06-28', 'proses', 'approved', '2025-06-23 08:00:00', '2025-06-23 12:30:00', 2, 'RAB dapat mulai dihitung');
+
 -- --------------------------------------------------------
 
 --
@@ -146,7 +158,8 @@ CREATE TABLE `users` (
   `id` int(11) NOT NULL,
   `first_name` varchar(100) NOT NULL,
   `last_name` varchar(100) NOT NULL,
-  `email` varchar(100) NOT NULL,
+  `username` varchar(100) NOT NULL,
+  `email` varchar(100) DEFAULT NULL,
   `password` varchar(255) NOT NULL,
   `role` enum('admin','client') DEFAULT 'client',
   `created_at` timestamp NOT NULL DEFAULT current_timestamp()
@@ -156,8 +169,8 @@ CREATE TABLE `users` (
 -- Dumping data untuk tabel `users`
 --
 
-INSERT INTO `users` (`id`, `first_name`, `last_name`, `email`, `password`, `role`, `created_at`) VALUES
-(1, 'iann', 'nub', 'mlayusek@gmail.com', '$2y$10$T4JDiPA62j/UIyd7alP62uPnBaH3A6Ia7ImTbvb6smSSM6X9Yy60q', 'admin', '2025-06-07 12:58:37');
+INSERT INTO `users` (`id`, `first_name`, `last_name`, `username`, `email`, `password`, `role`, `created_at`) VALUES
+(1, 'Client', 'Demo', 'client_demo', 'client@demo.com', '$2y$10$T4JDiPA62j/UIyd7alP62uPnBaH3A6Ia7ImTbvb6smSSM6X9Yy60q', 'client', '2025-06-07 12:58:37');
 
 --
 -- Indexes for dumped tables
@@ -207,6 +220,7 @@ ALTER TABLE `verifikasi_log`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `username` (`username`),
   ADD UNIQUE KEY `email` (`email`);
 
 --
@@ -217,7 +231,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT untuk tabel `file_gambar`
 --
 ALTER TABLE `file_gambar`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT untuk tabel `login_logs`
@@ -241,7 +255,7 @@ ALTER TABLE `petugas`
 -- AUTO_INCREMENT untuk tabel `tugas_proyek`
 --
 ALTER TABLE `tugas_proyek`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT untuk tabel `verifikasi_log`

@@ -12,12 +12,12 @@ function safe_session_start() {
 
 function check_session_auth($required_level = null) {
     safe_session_start();
-    
+
     if (!isset($_SESSION['nama'])) {
         header("Location: ../index.php");
         exit;
     }
-    
+
     if ($required_level && $_SESSION['level'] != $required_level) {
         echo "<script>alert('Anda tidak memiliki akses ke halaman ini!'); window.location='../index.php';</script>";
         exit;
