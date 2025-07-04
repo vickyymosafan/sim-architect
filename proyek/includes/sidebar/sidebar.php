@@ -33,7 +33,7 @@
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTugas"
                     aria-expanded="<?php echo (in_array(basename($_SERVER['PHP_SELF']), ['input_tugas.php', 'tugas_harian.php'])) ? 'true' : 'false'; ?>"
                     aria-controls="collapseTugas">
-                    <i class="fas fa-fw fa-folder-open"></i>
+                    <i class="fas fa-fw fa-tasks"></i>
                     <span>Manajemen Tugas</span>
                 </a>
                 <div id="collapseTugas" class="collapse <?php echo (in_array(basename($_SERVER['PHP_SELF']), ['input_tugas.php', 'tugas_harian.php'])) ? 'show' : ''; ?>"
@@ -46,7 +46,7 @@
                         </a>
                         <a class="dropdown-item <?php echo (basename($_SERVER['PHP_SELF']) == 'tugas_harian.php') ? 'active bg-primary text-white' : ''; ?>"
                            href="tugas_harian.php">
-                            <i class="fas fa-tasks mr-2"></i> Daftar Tugas Harian
+                            <i class="fas fa-list-alt mr-2"></i> Daftar Tugas Harian
                         </a>
                     </div>
                 </div>
@@ -57,7 +57,7 @@
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFile"
                     aria-expanded="<?php echo (in_array(basename($_SERVER['PHP_SELF']), ['upload_file.php', 'file_approved.php'])) ? 'true' : 'false'; ?>"
                     aria-controls="collapseFile">
-                    <i class="fas fa-fw fa-folder"></i>
+                    <i class="fas fa-fw fa-images"></i>
                     <span>Manajemen File</span>
                 </a>
                 <div id="collapseFile" class="collapse <?php echo (in_array(basename($_SERVER['PHP_SELF']), ['upload_file.php', 'file_approved.php'])) ? 'show' : ''; ?>"
@@ -78,28 +78,37 @@
             <!-- Divider -->
             <hr class="sidebar-divider">
 
-            <!-- Nav Item - Verifikasi & Approval -->
-            <li class="nav-item <?php echo (basename($_SERVER['PHP_SELF']) == 'verifikasi.php') ? 'active' : ''; ?>">
-                <a class="nav-link" href="verifikasi.php">
+            <!-- Heading -->
+            <div class="sidebar-heading">
+                Verifikasi & Review
+            </div>
+
+            <!-- Nav Item - Verifikasi & Review (Collapsible) -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseVerifikasi"
+                    aria-expanded="<?php echo (in_array(basename($_SERVER['PHP_SELF']), ['verifikasi.php', 'review_revisi.php', 'kelola_rab.php'])) ? 'true' : 'false'; ?>"
+                    aria-controls="collapseVerifikasi">
                     <i class="fas fa-fw fa-clipboard-check"></i>
-                    <span>Verifikasi & Approval</span>
+                    <span>Verifikasi & Review</span>
                 </a>
-            </li>
-
-            <!-- Nav Item - Review Revisi -->
-            <li class="nav-item <?php echo (basename($_SERVER['PHP_SELF']) == 'review_revisi.php') ? 'active' : ''; ?>">
-                <a class="nav-link" href="review_revisi.php">
-                    <i class="fas fa-fw fa-edit"></i>
-                    <span>Review Revisi</span>
-                </a>
-            </li>
-
-            <!-- Nav Item - Kelola RAB -->
-            <li class="nav-item <?php echo (basename($_SERVER['PHP_SELF']) == 'kelola_rab.php') ? 'active' : ''; ?>">
-                <a class="nav-link" href="kelola_rab.php">
-                    <i class="fas fa-fw fa-calculator"></i>
-                    <span>Kelola RAB</span>
-                </a>
+                <div id="collapseVerifikasi" class="collapse <?php echo (in_array(basename($_SERVER['PHP_SELF']), ['verifikasi.php', 'review_revisi.php', 'kelola_rab.php'])) ? 'show' : ''; ?>"
+                     aria-labelledby="headingVerifikasi" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Kelola Review:</h6>
+                        <a class="dropdown-item <?php echo (basename($_SERVER['PHP_SELF']) == 'verifikasi.php') ? 'active bg-primary text-white' : ''; ?>"
+                           href="verifikasi.php">
+                            <i class="fas fa-clipboard-check mr-2"></i> Verifikasi & Approval
+                        </a>
+                        <a class="dropdown-item <?php echo (basename($_SERVER['PHP_SELF']) == 'review_revisi.php') ? 'active bg-primary text-white' : ''; ?>"
+                           href="review_revisi.php">
+                            <i class="fas fa-edit mr-2"></i> Review Revisi
+                        </a>
+                        <a class="dropdown-item <?php echo (basename($_SERVER['PHP_SELF']) == 'kelola_rab.php') ? 'active bg-primary text-white' : ''; ?>"
+                           href="kelola_rab.php">
+                            <i class="fas fa-calculator mr-2"></i> Kelola RAB
+                        </a>
+                    </div>
+                </div>
             </li>
 
             <!-- Divider -->
