@@ -43,6 +43,42 @@
             </li>
 
             <!-- Divider -->
+            <hr class="sidebar-divider">
+
+            <!-- Heading -->
+            <div class="sidebar-heading">
+                Manajemen Proyek
+            </div>
+
+            <!-- Nav Item - Kelola Tugas Proyek -->
+            <li class="nav-item">
+                <a class="nav-link" href="kelola_tugas_proyek.php">
+                    <i class="fas fa-fw fa-tasks"></i>
+                    <span>Kelola Tugas Proyek</span></a>
+            </li>
+
+            <!-- Nav Item - Kelola File Gambar -->
+            <li class="nav-item">
+                <a class="nav-link" href="kelola_file_gambar.php">
+                    <i class="fas fa-fw fa-images"></i>
+                    <span>Kelola File Gambar</span></a>
+            </li>
+
+            <!-- Nav Item - Kelola RAB Proyek -->
+            <li class="nav-item">
+                <a class="nav-link" href="kelola_rab_proyek.php">
+                    <i class="fas fa-fw fa-file-invoice-dollar"></i>
+                    <span>Kelola RAB Proyek</span></a>
+            </li>
+
+            <!-- Nav Item - Kelola Revisi Request -->
+            <li class="nav-item">
+                <a class="nav-link" href="kelola_revisi_request.php">
+                    <i class="fas fa-fw fa-edit"></i>
+                    <span>Kelola Revisi Request</span></a>
+            </li>
+
+            <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
 
              <li class="nav-item">
