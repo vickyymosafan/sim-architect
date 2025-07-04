@@ -86,6 +86,14 @@
                 </a>
             </li>
 
+            <!-- Nav Item - Review Revisi -->
+            <li class="nav-item <?php echo (basename($_SERVER['PHP_SELF']) == 'review_revisi.php') ? 'active' : ''; ?>">
+                <a class="nav-link" href="review_revisi.php">
+                    <i class="fas fa-fw fa-edit"></i>
+                    <span>Review Revisi</span>
+                </a>
+            </li>
+
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
 

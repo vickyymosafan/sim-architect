@@ -41,6 +41,13 @@
                     <span>File Desain</span></a>
             </li>
 
+            <!-- Nav Item - Ajukan Revisi -->
+            <li class="nav-item <?php echo (basename($_SERVER['PHP_SELF']) == 'ajukan_revisi.php') ? 'active' : ''; ?>">
+                <a class="nav-link" href="ajukan_revisi.php">
+                    <i class="fas fa-fw fa-edit"></i>
+                    <span>Ajukan Revisi</span></a>
+            </li>
+
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
 

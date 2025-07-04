@@ -151,6 +151,55 @@ CREATE TABLE `verifikasi_log` (
 -- --------------------------------------------------------
 
 --
+-- Struktur dari tabel `revisi_request`
+--
+
+CREATE TABLE `revisi_request` (
+  `id` int(11) NOT NULL,
+  `client_id` int(11) NOT NULL,
+  `item_type` enum('tugas','file') NOT NULL,
+  `item_id` int(11) NOT NULL,
+  `alasan_revisi` text NOT NULL,
+  `detail_perubahan` text,
+  `file_referensi` varchar(255) DEFAULT NULL,
+  `status_revisi` enum('pending','approved','rejected') DEFAULT 'pending',
+  `tanggal_request` timestamp NOT NULL DEFAULT current_timestamp(),
+  `tanggal_response` timestamp NULL DEFAULT NULL,
+  `reviewer_id` int(11) DEFAULT NULL,
+  `catatan_reviewer` text DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data untuk tabel `revisi_request`
+--
+
+INSERT INTO `revisi_request` (`id`, `client_id`, `item_type`, `item_id`, `alasan_revisi`, `detail_perubahan`, `status_revisi`) VALUES
+(1, 1, 'file', 1, 'Perlu penyesuaian ukuran ruangan', 'Ruang tamu diperbesar 2x3 meter', 'pending'),
+(2, 1, 'tugas', 2, 'Perlu revisi konsep desain', 'Ganti tema dari minimalis ke modern', 'pending');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `revisi_quota`
+--
+
+CREATE TABLE `revisi_quota` (
+  `id` int(11) NOT NULL,
+  `client_id` int(11) NOT NULL,
+  `tanggal` date NOT NULL,
+  `jumlah_request` int(11) DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data untuk tabel `revisi_quota`
+--
+
+INSERT INTO `revisi_quota` (`id`, `client_id`, `tanggal`, `jumlah_request`) VALUES
+(1, 1, CURDATE(), 2);
+
+-- --------------------------------------------------------
+
+--
 -- Struktur dari tabel `users`
 --
 
@@ -216,6 +265,23 @@ ALTER TABLE `verifikasi_log`
   ADD KEY `fk_verifikasi_verifikator` (`verifikator_id`);
 
 --
+-- Indeks untuk tabel `revisi_request`
+--
+ALTER TABLE `revisi_request`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_revisi_client` (`client_id`),
+  ADD KEY `fk_revisi_reviewer` (`reviewer_id`),
+  ADD KEY `idx_item_type_id` (`item_type`, `item_id`);
+
+--
+-- Indeks untuk tabel `revisi_quota`
+--
+ALTER TABLE `revisi_quota`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `unique_client_date` (`client_id`, `tanggal`),
+  ADD KEY `fk_quota_client` (`client_id`);
+
+--
 -- Indeks untuk tabel `users`
 --
 ALTER TABLE `users`
@@ -264,6 +330,18 @@ ALTER TABLE `verifikasi_log`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1;
 
 --
+-- AUTO_INCREMENT untuk tabel `revisi_request`
+--
+ALTER TABLE `revisi_request`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT untuk tabel `revisi_quota`
+--
+ALTER TABLE `revisi_quota`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT untuk tabel `users`
 --
 ALTER TABLE `users`
@@ -280,6 +358,13 @@ ALTER TABLE `tugas_proyek`
 
 ALTER TABLE `verifikasi_log`
   ADD CONSTRAINT `fk_verifikasi_verifikator` FOREIGN KEY (`verifikator_id`) REFERENCES `petugas` (`id_petugas`) ON DELETE CASCADE;
+
+ALTER TABLE `revisi_request`
+  ADD CONSTRAINT `fk_revisi_client` FOREIGN KEY (`client_id`) REFERENCES `users` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `fk_revisi_reviewer` FOREIGN KEY (`reviewer_id`) REFERENCES `petugas` (`id_petugas`) ON DELETE SET NULL;
+
+ALTER TABLE `revisi_quota`
+  ADD CONSTRAINT `fk_quota_client` FOREIGN KEY (`client_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
 
 COMMIT;
 
