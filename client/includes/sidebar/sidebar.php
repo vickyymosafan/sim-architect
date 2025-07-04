@@ -48,6 +48,13 @@
                     <span>Ajukan Revisi</span></a>
             </li>
 
+            <!-- Nav Item - Lihat RAB -->
+            <li class="nav-item <?php echo (basename($_SERVER['PHP_SELF']) == 'lihat_rab.php') ? 'active' : ''; ?>">
+                <a class="nav-link" href="lihat_rab.php">
+                    <i class="fas fa-fw fa-calculator"></i>
+                    <span>Lihat RAB</span></a>
+            </li>
+
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
 

@@ -200,6 +200,36 @@ INSERT INTO `revisi_quota` (`id`, `client_id`, `tanggal`, `jumlah_request`) VALU
 -- --------------------------------------------------------
 
 --
+-- Struktur dari tabel `rab_proyek`
+--
+
+CREATE TABLE `rab_proyek` (
+  `id` int(11) NOT NULL,
+  `client_id` int(11) NOT NULL,
+  `nama_proyek` varchar(255) NOT NULL,
+  `deskripsi` text,
+  `file_rab` varchar(255) NOT NULL,
+  `file_size` int(11) DEFAULT NULL,
+  `file_type` varchar(50) DEFAULT NULL,
+  `status` enum('draft','approved','rejected') DEFAULT 'draft',
+  `tanggal_upload` timestamp NOT NULL DEFAULT current_timestamp(),
+  `tanggal_verifikasi` timestamp NULL DEFAULT NULL,
+  `verifikator_id` int(11) DEFAULT NULL,
+  `catatan_verifikasi` text DEFAULT NULL,
+  `created_by` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data untuk tabel `rab_proyek`
+--
+
+INSERT INTO `rab_proyek` (`id`, `client_id`, `nama_proyek`, `deskripsi`, `file_rab`, `file_size`, `file_type`, `status`, `tanggal_upload`, `tanggal_verifikasi`, `verifikator_id`, `catatan_verifikasi`, `created_by`) VALUES
+(1, 1, 'Rumah Minimalis 2 Lantai', 'RAB untuk pembangunan rumah minimalis 2 lantai dengan luas 120m2', 'rab_1_1735123200.pdf', 2048576, 'application/pdf', 'approved', '2025-06-24 08:00:00', '2025-06-24 16:00:00', 2, 'RAB sudah sesuai dengan spesifikasi dan budget client', 2),
+(2, 1, 'Renovasi Dapur Modern', 'RAB untuk renovasi dapur dengan konsep modern minimalis', 'rab_1_1735209600.xlsx', 1024000, 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', 'draft', '2025-06-25 10:00:00', NULL, NULL, NULL, 2);
+
+-- --------------------------------------------------------
+
+--
 -- Struktur dari tabel `users`
 --
 
@@ -282,6 +312,15 @@ ALTER TABLE `revisi_quota`
   ADD KEY `fk_quota_client` (`client_id`);
 
 --
+-- Indeks untuk tabel `rab_proyek`
+--
+ALTER TABLE `rab_proyek`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_rab_client` (`client_id`),
+  ADD KEY `fk_rab_verifikator` (`verifikator_id`),
+  ADD KEY `fk_rab_creator` (`created_by`);
+
+--
 -- Indeks untuk tabel `users`
 --
 ALTER TABLE `users`
@@ -342,6 +381,12 @@ ALTER TABLE `revisi_quota`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
+-- AUTO_INCREMENT untuk tabel `rab_proyek`
+--
+ALTER TABLE `rab_proyek`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT untuk tabel `users`
 --
 ALTER TABLE `users`
@@ -365,6 +410,11 @@ ALTER TABLE `revisi_request`
 
 ALTER TABLE `revisi_quota`
   ADD CONSTRAINT `fk_quota_client` FOREIGN KEY (`client_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
+
+ALTER TABLE `rab_proyek`
+  ADD CONSTRAINT `fk_rab_client` FOREIGN KEY (`client_id`) REFERENCES `users` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `fk_rab_verifikator` FOREIGN KEY (`verifikator_id`) REFERENCES `petugas` (`id_petugas`) ON DELETE SET NULL,
+  ADD CONSTRAINT `fk_rab_creator` FOREIGN KEY (`created_by`) REFERENCES `petugas` (`id_petugas`) ON DELETE SET NULL;
 
 COMMIT;
 
