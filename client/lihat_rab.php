@@ -6,6 +6,15 @@ $page_title = "Lihat RAB";
 include 'includes/header/header.php';
 require '../koneksi.php';
 
+// Function to format file size
+function formatFileSize($bytes) {
+    if ($bytes === 0) return '0 Bytes';
+    $k = 1024;
+    $sizes = ['Bytes', 'KB', 'MB', 'GB'];
+    $i = floor(log($bytes) / log($k));
+    return round($bytes / pow($k, $i), 2) . ' ' . $sizes[$i];
+}
+
 // Get client ID from session
 $client_id = $_SESSION['user_id'] ?? 1; // Default untuk testing
 ?>
@@ -208,14 +217,6 @@ $client_id = $_SESSION['user_id'] ?? 1; // Default untuk testing
                                                         $file_icon = 'fas fa-file-word';
                                                         $file_color = 'text-primary';
                                                         break;
-                                                }
-
-                                                function formatFileSize($bytes) {
-                                                    if ($bytes === 0) return '0 Bytes';
-                                                    $k = 1024;
-                                                    $sizes = ['Bytes', 'KB', 'MB', 'GB'];
-                                                    $i = floor(log($bytes) / log($k));
-                                                    return round($bytes / pow($k, $i), 2) . ' ' . $sizes[$i];
                                                 }
                                         ?>
                                         <tr>
