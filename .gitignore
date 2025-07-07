@@ -35,9 +35,11 @@ Thumbs.db
 *.backup
 *.old
 
-# Upload directories (uncomment if needed)
-# file_proyek/
-# uploads/
+# Upload directories (uncomment if needed) (uncomment if needed)
+file_proyek/
+file_proyek/
+file_rab/
+file_revisi/
 
 # Logs
 error.log

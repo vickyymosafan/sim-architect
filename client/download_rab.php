@@ -4,7 +4,7 @@ check_session_auth('client');
 require '../koneksi.php';
 
 $rab_id = (int)($_GET['id'] ?? 0);
-$client_id = $_SESSION['user_id'] ?? 1; // Default untuk testing
+$client_id = $_SESSION['id_client'] ?? 1; // Default untuk testing
 
 if ($rab_id <= 0) {
     echo "<script>alert('ID RAB tidak valid!'); window.close();</script>";

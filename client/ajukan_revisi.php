@@ -7,7 +7,7 @@ include 'includes/header/header.php';
 require '../koneksi.php';
 
 // Get client ID from session
-$client_id = $_SESSION['user_id'] ?? 1; // Default untuk testing
+$client_id = $_SESSION['id_client'] ?? 1; // Default untuk testing
 
 // Check daily quota
 $today = date('Y-m-d');
